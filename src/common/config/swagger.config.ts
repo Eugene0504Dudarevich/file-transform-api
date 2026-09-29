@@ -3,8 +3,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('My Backend API')
-    .setDescription('NestJS Backend API')
+    .setTitle('File Transformer API')
+    .setDescription('Backend API files between supported formats.')
     .setVersion('1.0')
     .build();
 

@@ -1,76 +1,97 @@
-# Backend Template
+# File Transformer API
 
-NestJS backend project template. HTTP kernel is **Fastify** (`@nestjs/platform-fastify`), not Express — use Fastify plugins and types (`NestFastifyApplication`, `app.register(...)`) in `src/main.ts`. Compression (`@fastify/compress`) and cookies (`@fastify/cookie`) are already registered.
+Backend API for converting files between supported formats.
 
-## Scripts
+The application is built with **NestJS**, uses **Fastify** as the HTTP server, **PostgreSQL** as the database, and **Prisma** as the ORM. The project is fully containerized with Docker Compose to simplify local development and setup.
 
-```bash
-npm run start:dev    # Development with hot reload
-npm run start:prod   # Production
-npm run build        # Build
-npm run lint         # Lint & fix
-npm run test         # Unit tests
-npm run test:e2e     # E2E tests
+# Tech Stack
+
+- Node.js 20
+- NestJS 11
+- Fastify
+- TypeScript
+- PostgreSQL 16
+- Prisma 6.15.0
+- Zod
+- Swagger
+- Docker / Docker Compose
+- pnpm
+
+# Prerequisites
+
+Before starting the project, make sure the following tools are installed
+
+- Node.js 20 or later
+- pnpm 10 or later
+- Docker
+- Docker Compose
+
+You can verify the installations:
+
 ```
+node --version
+pnpm --version
+docker --version
+docker compose version
+```
+
+The recommended way to run the application locally is with **Docker Compose**. The backend and PostgreSQL database run inside Docker and communicate through the Docker network. 
 
 ## Project Structure
 
+The project follows a **modular monolithic NestJS architecture**:
+
 ```
 src/
-├── core/
-│   ├── config/      # App configuration (env variables)
-│   ├── database/    # TypeORM + PostgreSQL connection
-│   ├── health/      # Health check endpoints
-│   └── app/         # Root module
-├── database/        # TypeORM CLI data-source and migrations
-├── modules/         # Feature modules
-└── main.ts          # Entry point
+├── common/
+│   |── config/
+│       |── swagger.config.ts
+│
+│── core/
+│   │── app/
+│   │── config/
+│   │── database/
+│
+│── modules/
+│   │── admin/
+│   │── auth/
+│   │── users/
+│
+│── database
+│   │── prisma/
+│       │── generated/
+│       │── migrations/
+│       │── schema.prisma
+│
+│── main.ts
 ```
+``common/``
 
-## Database
+Contains functionality shared across different parts of the application, such as common configuration and reusable infrastructure.
 
-PostgreSQL and TypeORM are already wired in. Use them for new modules — no extra setup.
+``core/``
 
-- **Local Postgres:** `docker compose up -d` (image and credentials from `.env` / `.env.example`)
-- **Connection:** `DatabaseModule` (`src/core/database`) is imported in `AppModule`
-- **Entities:** any `*.entity.ts` under `src/` is auto-loaded
-- **Repositories:** `TypeOrmModule.forFeature([YourEntity])` in a feature module, then `@InjectRepository(YourEntity)`
-- **Transactions:** `@Transactional()` from `typeorm-transactional` (context is initialized in `main.ts`)
-- **Schema:** migrations in `src/database/migrations/`. `POSTGRES_SYNCHRONIZE` is `false` by default — do not rely on auto-sync
+Contains core application infrastructure and services required by the application as a whole.
+For example:
+- application-level functionality
+- configuration
+- database integration
 
-```bash
-npm run migration:generate   # Generate from entity changes
-npm run migration:run        # Apply pending migrations
-npm run migration:revert     # Roll back the last migration
-npm run migration:show       # List applied / pending
-```
+``modules/``
 
-CLI uses `src/database/data-source.ts`. At runtime, Nest uses the DataSource from `DatabaseModule`. If `POSTGRES_MIGRATIONS_RUN=true`, pending migrations also run on app start.
+Contains the application's business modules.
+Each module encapsulates its own:
+- controllers
+- services
+- schemas
+- business logic
+- Swagger documentation
+- module configuration
 
-## Libraries
+``main.ts``
 
-| Purpose       | Library                  |
-|---------------|--------------------------|
-| HTTP          | Fastify (`@nestjs/platform-fastify`) |
-| Validation    | Joi                      |
-| ORM           | TypeORM (`@nestjs/typeorm`) |
-| Database      | PostgreSQL (`pg`)        |
-
-## Core Modules
-
-| Purpose       | Module           |
-|---------------|-----------------|
-| Configuration | `ConfigModule`  |
-| Database      | `DatabaseModule` |
-| Health Check  | `HealthModule`  |
-
-## Adding a Module
-
-```bash
-nest generate module <name>
-nest generate controller <name>
-nest generate service <name>
-```
+The application's entry point.
+It creates and configures the NestJS application using the **Fastify adapter** and starts the single backend application.
 
 ## Code Style
 
