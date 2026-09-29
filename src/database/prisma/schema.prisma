@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  BLOCKED
+}
+
+enum VerificationCodeType {
+  REGISTRATION
+  PASSWORD_RECOVERY
+  LOGIN
+}
+
+model User {
+  id                String @id @default(uuid())
+  email             String @unique
+  password          String
+  status            UserStatus @default(PENDING)
+  emailVerified     DateTime?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  verificationCodes VerificationCode[]
+}
+
+model VerificationCode {
+  id          String @id @default(uuid())
+  userId      String
+  type        VerificationCodeType
+  code        String
+  expiresAt   DateTime
+  attempts    Int @default(0)
+  maxAttempts Int @default(5)
+  lastSentAt  DateTime?
+  consumedAt  DateTime?
+  createdAt   DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, type])
+}
+
+model AuthSettings {
+  id                              String @id @default("default")
+  registrationVerificationEnabled Boolean @default(true)
+  createdAt                       DateTime @default(now())
+  updatedAt                       DateTime @updatedAt
+}
