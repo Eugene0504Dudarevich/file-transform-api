@@ -145,9 +145,40 @@ exports.Prisma.VerificationCodeScalarFieldEnum = {
 
 exports.Prisma.AuthSettingsScalarFieldEnum = {
   id: 'id',
+  loginVerificationEnabled: 'loginVerificationEnabled',
   registrationVerificationEnabled: 'registrationVerificationEnabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  actions: 'actions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GrantScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  permissionId: 'permissionId',
+  actions: 'actions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserRoleScalarFieldEnum = {
+  userId: 'userId',
+  roleId: 'roleId'
 };
 
 exports.Prisma.SortOrder = {
@@ -179,7 +210,11 @@ exports.VerificationCodeType = exports.$Enums.VerificationCodeType = {
 exports.Prisma.ModelName = {
   User: 'User',
   VerificationCode: 'VerificationCode',
-  AuthSettings: 'AuthSettings'
+  AuthSettings: 'AuthSettings',
+  Role: 'Role',
+  Permission: 'Permission',
+  Grant: 'Grant',
+  UserRole: 'UserRole'
 };
 
 /**

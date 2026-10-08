@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '@/core/database/prisma.service';
 import { createHmac, randomInt } from 'crypto';
+import { VerificationCodeType } from '../types/verification-code.type';
 import {
   MAX_ATTEMPTS,
   OTP_LENGTH,
@@ -35,11 +36,15 @@ export class OtpService {
     return MAX_ATTEMPTS;
   }
 
-  async verifyRegistrationCode(userId: string, code: string): Promise<void> {
+  async verifyCodeForUser(
+    userId: string,
+    type: VerificationCodeType,
+    code: string,
+  ): Promise<string> {
     const verificationCode = await this.prisma.verificationCode.findFirst({
       where: {
         userId,
-        type: 'REGISTRATION',
+        type,
         consumedAt: null,
       },
       orderBy: {
@@ -47,7 +52,46 @@ export class OtpService {
       },
     });
 
-    if (!verificationCode || verificationCode.expiresAt < new Date()) {
+    await this.verifyVerificationCode(verificationCode, code);
+
+    return verificationCode!.id;
+  }
+
+  async verifyCodeById(
+    verificationCodeId: string,
+    type: VerificationCodeType,
+    code: string,
+  ): Promise<string> {
+    const verificationCode = await this.prisma.verificationCode.findFirst({
+      where: {
+        id: verificationCodeId,
+        type,
+        consumedAt: null,
+      },
+    });
+
+    await this.verifyVerificationCode(verificationCode, code);
+
+    return verificationCode!.id;
+  }
+
+  private async verifyVerificationCode(
+    verificationCode: {
+      id: string;
+      userId: string;
+      code: string;
+      expiresAt: Date;
+      attempts: number;
+      maxAttempts: number;
+      consumedAt: Date | null;
+    } | null,
+    code: string,
+  ): Promise<void> {
+    if (
+      !verificationCode ||
+      verificationCode.expiresAt < new Date() ||
+      verificationCode.consumedAt
+    ) {
       throw new BadRequestException('Invalid or expired code');
     }
 
@@ -71,18 +115,45 @@ export class OtpService {
 
       throw new BadRequestException('Invalid or expired code');
     }
+  }
 
+  async getCodeById(verificationCodeId: string, type: VerificationCodeType) {
+    const verificationCode = await this.prisma.verificationCode.findFirst({
+      where: {
+        id: verificationCodeId,
+        type,
+        consumedAt: null,
+      },
+    });
+
+    if (!verificationCode || verificationCode.expiresAt < new Date()) {
+      throw new BadRequestException('Invalid or expired code');
+    }
+
+    if (verificationCode.attempts >= verificationCode.maxAttempts) {
+      throw new BadRequestException('Too many attempts');
+    }
+
+    return verificationCode;
+  }
+
+  async consumeVerificationCode(
+    verificationCodeId: string,
+    type: VerificationCodeType,
+  ): Promise<void> {
     try {
       await this.prisma.verificationCode.update({
         where: {
-          id: verificationCode.id,
+          id: verificationCodeId,
         },
         data: {
           consumedAt: new Date(),
         },
       });
     } catch {
-      throw new BadRequestException('Unable to verify registration');
+      throw new BadRequestException(
+        `Unable to verify ${type === VerificationCodeType.LOGIN ? 'login' : 'registration'}`,
+      );
     }
   }
 }

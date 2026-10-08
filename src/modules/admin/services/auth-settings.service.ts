@@ -19,7 +19,7 @@ export class AuthSettingsService {
     return settings.registrationVerificationEnabled;
   }
 
-  async setRegistrationEmailVerification(enabled: boolean) {
+  async setRegistrationVerification(enabled: boolean) {
     return await this.prisma.authSettings.upsert({
       where: { id: 'default' },
       update: {
@@ -28,6 +28,25 @@ export class AuthSettingsService {
       create: {
         id: 'default',
         registrationVerificationEnabled: enabled,
+      },
+    });
+  }
+
+  async isLoginVerificationEnabled(): Promise<boolean> {
+    const settings = await this.getSettings();
+
+    return settings.loginVerificationEnabled;
+  }
+
+  async setLoginVerification(enabled: boolean) {
+    return this.prisma.authSettings.upsert({
+      where: { id: 'default' },
+      update: {
+        loginVerificationEnabled: enabled,
+      },
+      create: {
+        id: 'default',
+        loginVerificationEnabled: enabled,
       },
     });
   }

@@ -1,0 +1,5 @@
+export enum VerificationCodeType {
+  LOGIN = 'LOGIN',
+  REGISTRATION = 'REGISTRATION',
+  PASSWORD_RECOVERY = 'PASSWORD_RECOVERY',
+}

@@ -6,6 +6,15 @@ export function setupSwagger(app: INestApplication) {
     .setTitle('File Transformer API')
     .setDescription('Backend API files between supported formats.')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Enter your JWT access token',
+      },
+      'access-token',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

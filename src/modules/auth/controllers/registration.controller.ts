@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { RegistrationService } from '../services/registration.service.js';
 import {
-  type RegisterInput,
-  registerSchema,
-} from '../schemas/register.schema.js';
+  type CredentialsInput,
+  credentialsSchema,
+} from '../schemas/credentials.schema.js';
 import {
   type VerifyRegistrationInput,
   verifyRegistrationSchema,
@@ -20,7 +20,9 @@ export class RegistrationController {
 
   @Post('register')
   @ApiRegistration()
-  register(@Body(new ZodValidationPipe(registerSchema)) body: RegisterInput) {
+  register(
+    @Body(new ZodValidationPipe(credentialsSchema)) body: CredentialsInput,
+  ) {
     return this.registrationService.register(body);
   }
 

@@ -1,9 +1,7 @@
 import { z } from 'zod';
 
-export const updateRegistrationVerificationSchema = z.object({
+export const updateVerificationSchema = z.object({
   enabled: z.boolean(),
 });
 
-export type UpdateRegistrationVerificationInput = z.infer<
-  typeof updateRegistrationVerificationSchema
->;
+export type UpdateVerificationInput = z.infer<typeof updateVerificationSchema>;

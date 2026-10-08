@@ -29,6 +29,7 @@ model User {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   verificationCodes VerificationCode[]
+  roles             UserRole[]
 }
 
 model VerificationCode {
@@ -49,7 +50,50 @@ model VerificationCode {
 
 model AuthSettings {
   id                              String   @id @default("default")
-  registrationVerificationEnabled Boolean  @default(true)
+  loginVerificationEnabled        Boolean  @default(false)
+  registrationVerificationEnabled Boolean  @default(false)
   createdAt                       DateTime @default(now())
   updatedAt                       DateTime @updatedAt
+}
+
+model Role {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  users       UserRole[]
+  grants      Grant[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Permission {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  actions   String[]
+  grants    Grant[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Grant {
+  id           String     @id @default(uuid())
+  roleId       String
+  permissionId String
+  actions      String[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Restrict)
+
+  @@unique([roleId, permissionId])
+}
+
+model UserRole {
+  userId String
+  roleId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, roleId])
 }

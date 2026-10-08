@@ -21,6 +21,9 @@
     "prisma:generate": "prisma generate --schema=src/database/prisma/schema.prisma",
     "prisma:migrate": "prisma migrate dev --schema=src/database/prisma/schema.prisma"
   },
+  "prisma": {
+    "seed": "tsx src/database/prisma/seed.ts"
+  },
   "dependencies": {
     "@fastify/compress": "^8.3.1",
     "@fastify/cookie": "^11.0.2",
@@ -28,6 +31,8 @@
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/jwt": "^12.0.2",
+    "@nestjs/passport": "^12.0.0",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/platform-fastify": "^11.1.13",
     "@nestjs/swagger": "^12.0.2",
@@ -38,6 +43,8 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "nodemailer": "^10.0.11",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
@@ -54,6 +61,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^22.10.7",
     "@types/nodemailer": "^8.0.2",
+    "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
@@ -68,6 +76,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
   },

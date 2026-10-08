@@ -11,7 +11,8 @@ import { EmailService } from './email.service.js';
 import { OtpService } from './otp.service.js';
 import { PasswordService } from './password.service.js';
 import { PrismaService } from '@/core/database/prisma.service';
-import { RegisterInput } from '../schemas/register.schema.js';
+import { CredentialsInput } from '../schemas/credentials.schema.js';
+import { VerificationCodeType } from '../types/verification-code.type';
 import { VerifyRegistrationInput } from '../schemas/verify-registration.schema.js';
 
 @Injectable()
@@ -24,7 +25,7 @@ export class RegistrationService {
     private readonly prisma: PrismaService,
   ) {}
 
-  async register(input: RegisterInput) {
+  async register(input: CredentialsInput) {
     const email = input.email.toLowerCase().trim();
 
     const existingUser = await this.prisma.user.findUnique({
@@ -105,9 +106,10 @@ export class RegistrationService {
         };
       });
 
-      await this.emailService.sendRegistrationCode(
+      await this.emailService.sendVerificationCode(
         result.user.email,
         result.otpCode,
+        VerificationCodeType.REGISTRATION,
       );
 
       return {
@@ -143,7 +145,11 @@ export class RegistrationService {
       throw new BadRequestException('Invalid or expired code');
     }
 
-    await this.otpService.verifyRegistrationCode(user.id, input.code);
+    const verificationCodeId = await this.otpService.verifyCodeForUser(
+      user.id,
+      VerificationCodeType.REGISTRATION,
+      input.code,
+    );
 
     try {
       await this.prisma.user.update({
@@ -153,6 +159,11 @@ export class RegistrationService {
           emailVerified: new Date(),
         },
       });
+
+      await this.otpService.consumeVerificationCode(
+        verificationCodeId,
+        VerificationCodeType.REGISTRATION,
+      );
 
       return { success: true };
     } catch {
