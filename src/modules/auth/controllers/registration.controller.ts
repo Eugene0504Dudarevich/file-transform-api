@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegistrationService } from '../services/registration.service.js';
 import {
   type CredentialsInput,
@@ -27,6 +27,7 @@ export class RegistrationController {
   }
 
   @Post('register/verify')
+  @HttpCode(HttpStatus.OK)
   @ApiVerifyRegistration()
   verifyRegistration(
     @Body(new ZodValidationPipe(verifyRegistrationSchema))

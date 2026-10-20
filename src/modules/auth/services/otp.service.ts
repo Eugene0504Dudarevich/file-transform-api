@@ -6,6 +6,7 @@ import {
   MAX_ATTEMPTS,
   OTP_LENGTH,
   OTP_TTL_MINUTES,
+  RESEND_INTERVAL_SECONDS,
 } from '../constants/otp.constants.js';
 
 @Injectable()
@@ -34,6 +35,10 @@ export class OtpService {
 
   get maxAttempts(): number {
     return MAX_ATTEMPTS;
+  }
+
+  get resendIntervalMilliseconds(): number {
+    return RESEND_INTERVAL_SECONDS * 1000;
   }
 
   async verifyCodeForUser(

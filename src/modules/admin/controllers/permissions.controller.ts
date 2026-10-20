@@ -25,9 +25,9 @@ import {
   updatePermissionSchema,
 } from '@/modules/admin/schemas/permission.schema';
 import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiCookieAuth } from '@nestjs/swagger';
 
-@ApiBearerAuth('access-token')
+@ApiCookieAuth('access_token')
 @UseGuards(JwtAuthGuard, RbacGuard)
 @Controller('admin/rbac/permissions')
 export class PermissionsController {

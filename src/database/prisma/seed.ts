@@ -150,6 +150,17 @@ async function main() {
     },
   });
 
+  const usersPermission = await prisma.permission.upsert({
+    where: { name: 'users' },
+    update: {
+      actions: ['read', 'create', 'update', 'delete'],
+    },
+    create: {
+      name: 'users',
+      actions: ['read', 'create', 'update', 'delete'],
+    },
+  });
+
   console.log('Permissions created');
 
   await prisma.grant.upsert({
@@ -199,6 +210,23 @@ async function main() {
     create: {
       roleId: adminRole.id,
       permissionId: grantsPermission.id,
+      actions: ['read', 'create', 'update', 'delete'],
+    },
+  });
+
+  await prisma.grant.upsert({
+    where: {
+      roleId_permissionId: {
+        roleId: adminRole.id,
+        permissionId: usersPermission.id,
+      },
+    },
+    update: {
+      actions: ['read', 'create', 'update', 'delete'],
+    },
+    create: {
+      roleId: adminRole.id,
+      permissionId: usersPermission.id,
       actions: ['read', 'create', 'update', 'delete'],
     },
   });

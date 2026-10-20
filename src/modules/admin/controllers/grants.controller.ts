@@ -25,9 +25,9 @@ import {
   type UpdateGrantInput,
   updateGrantSchema,
 } from '@/modules/admin/schemas/grant.schema';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiCookieAuth } from '@nestjs/swagger';
 
-@ApiBearerAuth('access-token')
+@ApiCookieAuth('access_token')
 @UseGuards(JwtAuthGuard, RbacGuard)
 @Controller('admin/rbac/grants')
 export class GrantsController {

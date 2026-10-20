@@ -59,6 +59,9 @@ importers:
       class-validator:
         specifier: ^0.14.3
         version: 0.14.4
+      fastify:
+        specifier: ^5.11.3
+        version: 5.11.3
       nodemailer:
         specifier: ^10.0.11
         version: 10.0.11

@@ -25,9 +25,9 @@ import {
   ApiGetRoles,
   ApiUpdateRole,
 } from '../swagger/roles.swagger';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiCookieAuth } from '@nestjs/swagger';
 
-@ApiBearerAuth('access-token')
+@ApiCookieAuth('access_token')
 @UseGuards(JwtAuthGuard, RbacGuard)
 @Controller('admin/rbac/roles')
 export class RolesController {

@@ -10,13 +10,15 @@ import { OtpService } from './services/otp.service';
 import { PasswordService } from './services/password.service';
 import { RegistrationService } from './services/registration.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { getRequiredSecret } from './utils/auth-cookies';
 
 @Module({
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_ACCESS_SECRET,
+      secret: getRequiredSecret('JWT_ACCESS_SECRET'),
       signOptions: {
+        algorithm: 'HS256',
         expiresIn: '15m',
       },
     }),

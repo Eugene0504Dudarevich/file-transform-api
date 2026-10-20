@@ -6,17 +6,22 @@ export function setupSwagger(app: INestApplication) {
     .setTitle('File Transformer API')
     .setDescription('Backend API files between supported formats.')
     .setVersion('1.0')
-    .addBearerAuth(
+    .addCookieAuth(
+      'access_token',
       {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        description: 'Enter your JWT access token',
+        type: 'apiKey',
+        in: 'cookie',
+        name: 'access_token',
+        description: 'JWT access token stored in an HttpOnly cookie',
       },
-      'access-token',
+      'access_token',
     )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      withCredentials: true,
+    },
+  });
 }
