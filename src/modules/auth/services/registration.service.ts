@@ -7,12 +7,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { AuthSettingsService } from '../../admin/services/auth-settings.service.js';
-import { EmailService } from './email.service.js';
-import { OtpService } from './otp.service.js';
+import { EmailService } from '@/common/services/email.service';
+import { OtpService } from '../../../common/services/otp.service';
 import { PasswordService } from './password.service.js';
 import { PrismaService } from '@/core/database/prisma.service';
 import { CredentialsInput } from '../schemas/credentials.schema.js';
-import { VerificationCodeType } from '../types/verification-code.type';
+import { VerificationCodeType } from '@/common/types/verification-code.type';
 import { VerifyRegistrationInput } from '../schemas/verify-registration.schema.js';
 
 @Injectable()

@@ -5,13 +5,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthSettingsService } from '@/modules/admin/services/auth-settings.service';
-import { EmailService } from './email.service';
-import { OtpService } from './otp.service';
+import { EmailService } from '@/common/services/email.service';
+import { OtpService } from '@/common/services/otp.service';
 import { PasswordService } from './password.service';
 import { PrismaService } from '@/core/database/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { CredentialsInput } from '../schemas/credentials.schema';
-import { VerificationCodeType } from '../types/verification-code.type';
+import { VerificationCodeType } from '@/common/types/verification-code.type';
 import { VerifyLoginInput } from '../schemas/verify-login.schema';
 import { ResendLoginInput } from '../schemas/resend-login.schema';
 import { getJwtSecrets } from '@/modules/auth/utils/auth-cookies';

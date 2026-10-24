@@ -1,4 +1,4 @@
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { HttpStatus } from '@nestjs/common';
 
 export const ApiUserProfile = (): MethodDecorator => {
@@ -68,6 +68,229 @@ export const ApiUserProfile = (): MethodDecorator => {
     ApiResponse({
       status: HttpStatus.NOT_FOUND,
       description: 'User not found',
+    })(target, propertyKey, descriptor);
+  };
+};
+
+export const ApiUpdateUserProfile = (): MethodDecorator => {
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) => {
+    ApiOperation({
+      summary: 'Update user profile',
+      description:
+        'Updates permitted profile fields. User can update their own photo ' +
+        'but cannot change their email through this endpoint. ' +
+        'Self-service email changes require the email verification flow. ' +
+        'Users with users.update permission can update another users ' +
+        'profile, including changing their email directly.',
+    })(target, propertyKey, descriptor);
+
+    ApiParam({
+      name: 'userId',
+      type: 'string',
+      format: 'uuid',
+      description: 'Id of the user to update',
+    })(target, propertyKey, descriptor);
+
+    ApiBody({
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        minProperties: 1,
+        properties: {
+          email: {
+            type: 'string',
+            format: 'email',
+            example: 'new@example.com',
+          },
+          photo: {
+            type: 'string',
+            nullable: true,
+            example: 'https://example.com/avatar.jpg',
+          },
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.OK,
+      description: 'User profile updated successfully',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.BAD_REQUEST,
+      description: 'Invalid parameters or request body',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.UNAUTHORIZED,
+      description: 'Missing, invalid, or expired access JWT',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.FORBIDDEN,
+      description: 'User does not have permission',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NOT_FOUND,
+      description: 'User not found',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.CONFLICT,
+      description: 'Email is already in use',
+    })(target, propertyKey, descriptor);
+  };
+};
+
+export const ApiInitiateEmailChange = (): MethodDecorator => {
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) => {
+    ApiOperation({
+      summary: 'Initiate email change',
+      description:
+        'Creates an email-change verification change and send OTP ' +
+        'to the new email address. Only the account owner may initiate the change.',
+    })(target, propertyKey, descriptor);
+
+    ApiParam({
+      name: 'userId',
+      type: 'string',
+      format: 'uuid',
+    })(target, propertyKey, descriptor);
+
+    ApiBody({
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['newEmail'],
+        properties: {
+          newEmail: {
+            type: 'string',
+            format: 'email',
+            example: 'new@example.com',
+          },
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.OK,
+      description: 'Verification change created',
+      schema: {
+        example: {
+          success: true,
+          requiresConfirmation: true,
+          changeId: '7c3e4c9a-5e40-4a2c-bf6c-4b22f48e27e2',
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.BAD_REQUEST,
+      description: 'Invalid email or resend cooldown has not elapsed',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.UNAUTHORIZED,
+      description: 'Missing, invalid, or expired access JWT',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.FORBIDDEN,
+      description: 'Email can only be changed by its owner',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NOT_FOUND,
+      description: 'User not found',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.CONFLICT,
+      description: 'Email is already in use',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.TOO_MANY_REQUESTS,
+      description: 'Rate limit exceeded',
+    })(target, propertyKey, descriptor);
+  };
+};
+
+export const ApiConfirmEmailChange = (): MethodDecorator => {
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) => {
+    ApiOperation({
+      summary: 'Confirm email change',
+      description:
+        'Verifies the OTP send to the new email and updates the account email.',
+    })(target, propertyKey, descriptor);
+
+    ApiParam({
+      name: 'userId',
+      type: 'string',
+      format: 'uuid',
+    })(target, propertyKey, descriptor);
+
+    ApiBody({
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['code'],
+        properties: {
+          code: {
+            type: 'string',
+            pattern: '^\\d{6}$',
+            example: '123456',
+          },
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.OK,
+      description: 'Email changed successfully',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.BAD_REQUEST,
+      description: 'Invalid, expired, consumed, or exhausted OTP',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.UNAUTHORIZED,
+      description: 'Missing, invalid, or expired access JWT',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.FORBIDDEN,
+      description: 'Email can only be changed by its owner',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NOT_FOUND,
+      description: 'User not found',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.CONFLICT,
+      description: 'Email is already in use',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.TOO_MANY_REQUESTS,
+      description: 'Rate limit exceeded',
     })(target, propertyKey, descriptor);
   };
 };

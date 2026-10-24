@@ -7,7 +7,7 @@ import {
   OTP_LENGTH,
   OTP_TTL_MINUTES,
   RESEND_INTERVAL_SECONDS,
-} from '../constants/otp.constants.js';
+} from '../constants/otp.constants';
 
 @Injectable()
 export class OtpService {

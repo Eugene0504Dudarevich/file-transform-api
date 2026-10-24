@@ -18,6 +18,7 @@ enum VerificationCodeType {
   REGISTRATION
   PASSWORD_RECOVERY
   LOGIN
+  EMAIL_CHANGE
 }
 
 model User {
@@ -34,17 +35,18 @@ model User {
 }
 
 model VerificationCode {
-  id          String               @id @default(uuid())
-  userId      String
-  type        VerificationCodeType
-  code        String
-  expiresAt   DateTime
-  attempts    Int                  @default(0)
-  maxAttempts Int                  @default(5)
-  lastSentAt  DateTime?
-  consumedAt  DateTime?
-  createdAt   DateTime             @default(now())
-  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String               @id @default(uuid())
+  userId       String
+  type         VerificationCodeType
+  code         String
+  pendingEmail String?
+  expiresAt    DateTime
+  attempts     Int                  @default(0)
+  maxAttempts  Int                  @default(5)
+  lastSentAt   DateTime?
+  consumedAt   DateTime?
+  createdAt    DateTime             @default(now())
+  user         User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, type])
 }

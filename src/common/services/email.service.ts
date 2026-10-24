@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
-import { OTP_TTL_MINUTES } from '../constants/otp.constants.js';
-import { VerificationCodeType } from '../types/verification-code.type';
+import { OTP_TTL_MINUTES } from '@/common/constants/otp.constants';
+import { VerificationCodeType } from '@/common/types/verification-code.type';
 
 @Injectable()
 export class EmailService {
@@ -30,10 +30,10 @@ export class EmailService {
         from: process.env.SMTP_FROM,
         to: email,
         subject,
-        text: `
-          ${textMessage}
-          The code is valid for ${OTP_TTL_MINUTES} minutes. 
-        `.trim(),
+        text: [
+          textMessage,
+          `The code is valid for ${OTP_TTL_MINUTES} minutes.`,
+        ].join('\n'),
         html: `
           <div style="font-family: Arial, sans-serif; line-height: 1.5;">
             <p>${htmlMessage}</p>
@@ -55,8 +55,10 @@ export class EmailService {
         return 'Confirm your registration';
       case VerificationCodeType.LOGIN:
         return 'Confirm your login';
+      case VerificationCodeType.EMAIL_CHANGE:
+        return 'Confirm your email change';
       default:
-        return '';
+        return 'Account verification';
     }
   }
 
@@ -66,8 +68,10 @@ export class EmailService {
         return `Your verification code is ${code}. If you didn't create an account, you can ignore this email.`;
       case VerificationCodeType.LOGIN:
         return `Your verification code is ${code}. If you didn't try to sign in, please secure your account.`;
+      case VerificationCodeType.EMAIL_CHANGE:
+        return `Your email change verification code is ${code}. If you didn't request this change, you can ignore this email.`;
       default:
-        return '';
+        return `Your verification code is ${code}.`;
     }
   }
 
@@ -77,8 +81,10 @@ export class EmailService {
         return 'Your registration verification code is:';
       case VerificationCodeType.LOGIN:
         return 'Your login verification code is:';
+      case VerificationCodeType.EMAIL_CHANGE:
+        return 'Your email change verification code is:';
       default:
-        return '';
+        return 'Your verification code is:';
     }
   }
 
@@ -88,8 +94,10 @@ export class EmailService {
         return 'Unable to send registration email.';
       case VerificationCodeType.LOGIN:
         return 'Unable to send login verification email.';
+      case VerificationCodeType.EMAIL_CHANGE:
+        return 'Unable to send email change verification email.';
       default:
-        return '';
+        return 'Unable to send verification email.';
     }
   }
 }

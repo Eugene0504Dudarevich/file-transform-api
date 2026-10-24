@@ -136,6 +136,7 @@ exports.Prisma.VerificationCodeScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   code: 'code',
+  pendingEmail: 'pendingEmail',
   expiresAt: 'expiresAt',
   attempts: 'attempts',
   maxAttempts: 'maxAttempts',
@@ -205,7 +206,8 @@ exports.UserStatus = exports.$Enums.UserStatus = {
 exports.VerificationCodeType = exports.$Enums.VerificationCodeType = {
   REGISTRATION: 'REGISTRATION',
   PASSWORD_RECOVERY: 'PASSWORD_RECOVERY',
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  EMAIL_CHANGE: 'EMAIL_CHANGE'
 };
 
 exports.Prisma.ModelName = {

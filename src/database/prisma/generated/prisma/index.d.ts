@@ -65,7 +65,8 @@ export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 export const VerificationCodeType: {
   REGISTRATION: 'REGISTRATION',
   PASSWORD_RECOVERY: 'PASSWORD_RECOVERY',
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  EMAIL_CHANGE: 'EMAIL_CHANGE'
 };
 
 export type VerificationCodeType = (typeof VerificationCodeType)[keyof typeof VerificationCodeType]
@@ -2707,6 +2708,7 @@ export namespace Prisma {
     userId: string | null
     type: $Enums.VerificationCodeType | null
     code: string | null
+    pendingEmail: string | null
     expiresAt: Date | null
     attempts: number | null
     maxAttempts: number | null
@@ -2720,6 +2722,7 @@ export namespace Prisma {
     userId: string | null
     type: $Enums.VerificationCodeType | null
     code: string | null
+    pendingEmail: string | null
     expiresAt: Date | null
     attempts: number | null
     maxAttempts: number | null
@@ -2733,6 +2736,7 @@ export namespace Prisma {
     userId: number
     type: number
     code: number
+    pendingEmail: number
     expiresAt: number
     attempts: number
     maxAttempts: number
@@ -2758,6 +2762,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     code?: true
+    pendingEmail?: true
     expiresAt?: true
     attempts?: true
     maxAttempts?: true
@@ -2771,6 +2776,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     code?: true
+    pendingEmail?: true
     expiresAt?: true
     attempts?: true
     maxAttempts?: true
@@ -2784,6 +2790,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     code?: true
+    pendingEmail?: true
     expiresAt?: true
     attempts?: true
     maxAttempts?: true
@@ -2884,6 +2891,7 @@ export namespace Prisma {
     userId: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail: string | null
     expiresAt: Date
     attempts: number
     maxAttempts: number
@@ -2916,6 +2924,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     code?: boolean
+    pendingEmail?: boolean
     expiresAt?: boolean
     attempts?: boolean
     maxAttempts?: boolean
@@ -2930,6 +2939,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     code?: boolean
+    pendingEmail?: boolean
     expiresAt?: boolean
     attempts?: boolean
     maxAttempts?: boolean
@@ -2944,6 +2954,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     code?: boolean
+    pendingEmail?: boolean
     expiresAt?: boolean
     attempts?: boolean
     maxAttempts?: boolean
@@ -2958,6 +2969,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     code?: boolean
+    pendingEmail?: boolean
     expiresAt?: boolean
     attempts?: boolean
     maxAttempts?: boolean
@@ -2966,7 +2978,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type VerificationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "code" | "expiresAt" | "attempts" | "maxAttempts" | "lastSentAt" | "consumedAt" | "createdAt", ExtArgs["result"]["verificationCode"]>
+  export type VerificationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "code" | "pendingEmail" | "expiresAt" | "attempts" | "maxAttempts" | "lastSentAt" | "consumedAt" | "createdAt", ExtArgs["result"]["verificationCode"]>
   export type VerificationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2987,6 +2999,7 @@ export namespace Prisma {
       userId: string
       type: $Enums.VerificationCodeType
       code: string
+      pendingEmail: string | null
       expiresAt: Date
       attempts: number
       maxAttempts: number
@@ -3421,6 +3434,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"VerificationCode", 'String'>
     readonly type: FieldRef<"VerificationCode", 'VerificationCodeType'>
     readonly code: FieldRef<"VerificationCode", 'String'>
+    readonly pendingEmail: FieldRef<"VerificationCode", 'String'>
     readonly expiresAt: FieldRef<"VerificationCode", 'DateTime'>
     readonly attempts: FieldRef<"VerificationCode", 'Int'>
     readonly maxAttempts: FieldRef<"VerificationCode", 'Int'>
@@ -9135,6 +9149,7 @@ export namespace Prisma {
     userId: 'userId',
     type: 'type',
     code: 'code',
+    pendingEmail: 'pendingEmail',
     expiresAt: 'expiresAt',
     attempts: 'attempts',
     maxAttempts: 'maxAttempts',
@@ -9403,6 +9418,7 @@ export namespace Prisma {
     userId?: StringFilter<"VerificationCode"> | string
     type?: EnumVerificationCodeTypeFilter<"VerificationCode"> | $Enums.VerificationCodeType
     code?: StringFilter<"VerificationCode"> | string
+    pendingEmail?: StringNullableFilter<"VerificationCode"> | string | null
     expiresAt?: DateTimeFilter<"VerificationCode"> | Date | string
     attempts?: IntFilter<"VerificationCode"> | number
     maxAttempts?: IntFilter<"VerificationCode"> | number
@@ -9417,6 +9433,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     code?: SortOrder
+    pendingEmail?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
     attempts?: SortOrder
     maxAttempts?: SortOrder
@@ -9434,6 +9451,7 @@ export namespace Prisma {
     userId?: StringFilter<"VerificationCode"> | string
     type?: EnumVerificationCodeTypeFilter<"VerificationCode"> | $Enums.VerificationCodeType
     code?: StringFilter<"VerificationCode"> | string
+    pendingEmail?: StringNullableFilter<"VerificationCode"> | string | null
     expiresAt?: DateTimeFilter<"VerificationCode"> | Date | string
     attempts?: IntFilter<"VerificationCode"> | number
     maxAttempts?: IntFilter<"VerificationCode"> | number
@@ -9448,6 +9466,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     code?: SortOrder
+    pendingEmail?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
     attempts?: SortOrder
     maxAttempts?: SortOrder
@@ -9469,6 +9488,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"VerificationCode"> | string
     type?: EnumVerificationCodeTypeWithAggregatesFilter<"VerificationCode"> | $Enums.VerificationCodeType
     code?: StringWithAggregatesFilter<"VerificationCode"> | string
+    pendingEmail?: StringNullableWithAggregatesFilter<"VerificationCode"> | string | null
     expiresAt?: DateTimeWithAggregatesFilter<"VerificationCode"> | Date | string
     attempts?: IntWithAggregatesFilter<"VerificationCode"> | number
     maxAttempts?: IntWithAggregatesFilter<"VerificationCode"> | number
@@ -9839,6 +9859,7 @@ export namespace Prisma {
     id?: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -9853,6 +9874,7 @@ export namespace Prisma {
     userId: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -9865,6 +9887,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -9879,6 +9902,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -9892,6 +9916,7 @@ export namespace Prisma {
     userId: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -9904,6 +9929,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -9917,6 +9943,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -10419,6 +10446,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     code?: SortOrder
+    pendingEmail?: SortOrder
     expiresAt?: SortOrder
     attempts?: SortOrder
     maxAttempts?: SortOrder
@@ -10437,6 +10465,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     code?: SortOrder
+    pendingEmail?: SortOrder
     expiresAt?: SortOrder
     attempts?: SortOrder
     maxAttempts?: SortOrder
@@ -10450,6 +10479,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     code?: SortOrder
+    pendingEmail?: SortOrder
     expiresAt?: SortOrder
     attempts?: SortOrder
     maxAttempts?: SortOrder
@@ -11196,6 +11226,7 @@ export namespace Prisma {
     id?: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -11208,6 +11239,7 @@ export namespace Prisma {
     id?: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -11268,6 +11300,7 @@ export namespace Prisma {
     userId?: StringFilter<"VerificationCode"> | string
     type?: EnumVerificationCodeTypeFilter<"VerificationCode"> | $Enums.VerificationCodeType
     code?: StringFilter<"VerificationCode"> | string
+    pendingEmail?: StringNullableFilter<"VerificationCode"> | string | null
     expiresAt?: DateTimeFilter<"VerificationCode"> | Date | string
     attempts?: IntFilter<"VerificationCode"> | number
     maxAttempts?: IntFilter<"VerificationCode"> | number
@@ -11714,6 +11747,7 @@ export namespace Prisma {
     id?: string
     type: $Enums.VerificationCodeType
     code: string
+    pendingEmail?: string | null
     expiresAt: Date | string
     attempts?: number
     maxAttempts?: number
@@ -11730,6 +11764,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -11742,6 +11777,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
@@ -11754,6 +11790,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumVerificationCodeTypeFieldUpdateOperationsInput | $Enums.VerificationCodeType
     code?: StringFieldUpdateOperationsInput | string
+    pendingEmail?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     maxAttempts?: IntFieldUpdateOperationsInput | number
