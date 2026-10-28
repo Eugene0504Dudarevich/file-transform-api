@@ -207,7 +207,8 @@ exports.VerificationCodeType = exports.$Enums.VerificationCodeType = {
   REGISTRATION: 'REGISTRATION',
   PASSWORD_RECOVERY: 'PASSWORD_RECOVERY',
   LOGIN: 'LOGIN',
-  EMAIL_CHANGE: 'EMAIL_CHANGE'
+  EMAIL_CHANGE: 'EMAIL_CHANGE',
+  ACCOUNT_DELETION: 'ACCOUNT_DELETION'
 };
 
 exports.Prisma.ModelName = {

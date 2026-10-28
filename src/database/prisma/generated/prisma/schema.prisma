@@ -19,6 +19,7 @@ enum VerificationCodeType {
   PASSWORD_RECOVERY
   LOGIN
   EMAIL_CHANGE
+  ACCOUNT_DELETION
 }
 
 model User {

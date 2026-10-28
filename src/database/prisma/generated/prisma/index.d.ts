@@ -66,7 +66,8 @@ export const VerificationCodeType: {
   REGISTRATION: 'REGISTRATION',
   PASSWORD_RECOVERY: 'PASSWORD_RECOVERY',
   LOGIN: 'LOGIN',
-  EMAIL_CHANGE: 'EMAIL_CHANGE'
+  EMAIL_CHANGE: 'EMAIL_CHANGE',
+  ACCOUNT_DELETION: 'ACCOUNT_DELETION'
 };
 
 export type VerificationCodeType = (typeof VerificationCodeType)[keyof typeof VerificationCodeType]

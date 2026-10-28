@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -17,22 +18,21 @@ import { FastifyRequest } from 'fastify';
 import { UsersService } from '../services/users.service';
 import { AuthenticatedUser } from '@/modules/auth/types/authenticated-user.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
-import { userProfileSchema } from '../schemas/user-profile.schema';
+import { userIdParamsSchema } from '../schemas/user-params.schema';
+import { updateUserSchema } from '../schemas/update-user.schema';
 import {
+  confirmEmailChangeSchema,
+  initiateEmailChangeSchema,
+} from '../schemas/email-change.schema';
+import {
+  ApiAccountDeletion,
   ApiConfirmEmailChange,
+  ApiInitiateAccountDeletion,
   ApiInitiateEmailChange,
   ApiUpdateUserProfile,
   ApiUserProfile,
 } from '../swagger/user-profile.swagger';
-import {
-  updateUserParamsSchema,
-  updateUserSchema,
-} from '@/modules/users/schemas/update-user.schema';
-import {
-  confirmEmailChangeSchema,
-  emailChangeParamsSchema,
-  initiateEmailChangeSchema,
-} from '@/modules/users/schemas/email-change.schema';
+import { confirmAccountDeletionSchema } from '@/modules/users/schemas/delete-user.schema';
 
 type AuthenticatedFastifyRequest = FastifyRequest & {
   user: AuthenticatedUser;
@@ -50,7 +50,7 @@ export class UsersController {
     @Param() params: unknown,
     @Req() request: AuthenticatedFastifyRequest,
   ) {
-    const parsedParams = userProfileSchema.safeParse(params);
+    const parsedParams = userIdParamsSchema.safeParse(params);
 
     if (!parsedParams.success) {
       throw new BadRequestException({
@@ -72,7 +72,7 @@ export class UsersController {
     @Body() body: unknown,
     @Req() request: AuthenticatedFastifyRequest,
   ) {
-    const parsedParams = updateUserParamsSchema.safeParse(params);
+    const parsedParams = userIdParamsSchema.safeParse(params);
 
     if (!parsedParams.success) {
       throw new BadRequestException({
@@ -107,7 +107,7 @@ export class UsersController {
     @Body() body: unknown,
     @Req() request: AuthenticatedFastifyRequest,
   ) {
-    const parsedParams = emailChangeParamsSchema.safeParse(params);
+    const parsedParams = userIdParamsSchema.safeParse(params);
 
     if (!parsedParams.success) {
       throw new BadRequestException({
@@ -142,7 +142,7 @@ export class UsersController {
     @Body() body: unknown,
     @Req() request: AuthenticatedFastifyRequest,
   ) {
-    const parsedParams = emailChangeParamsSchema.safeParse(params);
+    const parsedParams = userIdParamsSchema.safeParse(params);
 
     if (!parsedParams.success) {
       throw new BadRequestException({
@@ -165,5 +165,67 @@ export class UsersController {
       parsedParams.data.userId,
       parsedBody.data,
     );
+  }
+
+  @Post(':userId/deletion-confirmation')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(ThrottlerGuard)
+  @Throttle({ default: { limit: 3, ttl: 60_000 } })
+  @ApiInitiateAccountDeletion()
+  async initiateAccountDeletion(
+    @Param() params: unknown,
+    @Req() request: AuthenticatedFastifyRequest,
+  ) {
+    const parsedParams = userIdParamsSchema.safeParse(params);
+
+    if (!parsedParams.success) {
+      throw new BadRequestException({
+        message: 'Invalid user id',
+        errors: parsedParams.error.issues,
+      });
+    }
+
+    return this.usersService.initiateAccountDeletion(
+      request.user.id,
+      parsedParams.data.userId,
+    );
+  }
+
+  @Delete(':userId')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiAccountDeletion()
+  async deleteUser(
+    @Param() params: unknown,
+    @Body() body: unknown,
+    @Req() request: AuthenticatedFastifyRequest,
+  ) {
+    const parsedParams = userIdParamsSchema.safeParse(params);
+
+    if (!parsedParams.success) {
+      throw new BadRequestException({
+        message: 'Invalid user id',
+        errors: parsedParams.error.issues,
+      });
+    }
+
+    const targetUserId = parsedParams.data.userId;
+    const actorUserId = request.user.id;
+    const isSelf = actorUserId === targetUserId;
+    let code: string | undefined;
+
+    if (isSelf) {
+      const parsedBody = confirmAccountDeletionSchema.safeParse(body);
+
+      if (!parsedBody.success) {
+        throw new BadRequestException({
+          message: 'Validation failed',
+          errors: parsedBody.error.issues,
+        });
+      }
+
+      code = parsedBody.data.code;
+    }
+
+    await this.usersService.deleteUser(actorUserId, targetUserId, code);
   }
 }

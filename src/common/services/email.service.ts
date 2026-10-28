@@ -57,6 +57,8 @@ export class EmailService {
         return 'Confirm your login';
       case VerificationCodeType.EMAIL_CHANGE:
         return 'Confirm your email change';
+      case VerificationCodeType.ACCOUNT_DELETION:
+        return 'Account deletion confirmation';
       default:
         return 'Account verification';
     }
@@ -70,6 +72,8 @@ export class EmailService {
         return `Your verification code is ${code}. If you didn't try to sign in, please secure your account.`;
       case VerificationCodeType.EMAIL_CHANGE:
         return `Your email change verification code is ${code}. If you didn't request this change, you can ignore this email.`;
+      case VerificationCodeType.ACCOUNT_DELETION:
+        return 'If you did not request account deletion, you can ignore this email. You account will not be deleted unless the request is confirmed.';
       default:
         return `Your verification code is ${code}.`;
     }
@@ -83,6 +87,8 @@ export class EmailService {
         return 'Your login verification code is:';
       case VerificationCodeType.EMAIL_CHANGE:
         return 'Your email change verification code is:';
+      case VerificationCodeType.ACCOUNT_DELETION:
+        return 'Your account deletion confirmation code is:';
       default:
         return 'Your verification code is:';
     }
@@ -96,6 +102,8 @@ export class EmailService {
         return 'Unable to send login verification email.';
       case VerificationCodeType.EMAIL_CHANGE:
         return 'Unable to send email change verification email.';
+      case VerificationCodeType.ACCOUNT_DELETION:
+        return 'Unable to send account deletion email.';
       default:
         return 'Unable to send verification email.';
     }

@@ -11,10 +11,6 @@ const photoSchema = z.union([
   z.null(),
 ]);
 
-export const updateUserParamsSchema = z.object({
-  userId: z.uuid(),
-});
-
 export const updateUserSchema = z
   .object({
     email: z.email().trim().toLowerCase().optional(),

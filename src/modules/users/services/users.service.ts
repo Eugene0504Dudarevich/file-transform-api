@@ -436,4 +436,245 @@ export class UsersService {
       throw new ForbiddenException('Email can only be changed by its owner');
     }
   }
+
+  async initiateAccountDeletion(actorUserId: string, targetUserId: string) {
+    this.assertSelf(actorUserId, targetUserId);
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: targetUserId },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const latestCode = await this.prisma.verificationCode.findFirst({
+      where: {
+        userId: targetUserId,
+        type: VerificationCodeType.ACCOUNT_DELETION,
+        consumedAt: null,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    const resendInterval = this.otpService.resendIntervalMilliseconds;
+
+    if (
+      latestCode?.lastSentAt &&
+      Date.now() - latestCode.lastSentAt.getTime() < resendInterval
+    ) {
+      throw new BadRequestException(
+        'Please wait before requesting another deletion code',
+      );
+    }
+
+    const code = this.otpService.generateCode();
+    const codeHash = this.otpService.hashCode(code);
+    const now = new Date();
+
+    const verificationCode = await this.prisma.$transaction(
+      async (transaction) => {
+        await transaction.verificationCode.updateMany({
+          where: {
+            userId: targetUserId,
+            type: VerificationCodeType.ACCOUNT_DELETION,
+            consumedAt: null,
+          },
+          data: { consumedAt: now },
+        });
+
+        return transaction.verificationCode.create({
+          data: {
+            userId: targetUserId,
+            type: VerificationCodeType.ACCOUNT_DELETION,
+            code: codeHash,
+            expiresAt: this.otpService.expirationDate,
+            maxAttempts: this.otpService.maxAttempts,
+            lastSentAt: now,
+          },
+        });
+      },
+    );
+
+    try {
+      await this.emailService.sendVerificationCode(
+        user.email,
+        code,
+        VerificationCodeType.ACCOUNT_DELETION,
+      );
+    } catch (error) {
+      await this.prisma.verificationCode.updateMany({
+        where: {
+          id: verificationCode.id,
+          consumedAt: null,
+        },
+        data: { consumedAt: new Date() },
+      });
+
+      this.logDeletionAudit({
+        actorUserId,
+        targetUserId,
+        operation: 'SELF',
+        result: 'failure',
+        reason: 'confirmation_email_failed',
+      });
+
+      throw error;
+    }
+
+    this.logDeletionAudit({
+      actorUserId,
+      targetUserId,
+      operation: 'SELF',
+      result: 'success',
+      reason: 'confirmation_requested',
+    });
+
+    return {
+      success: true,
+      requiresConfirmation: true,
+    };
+  }
+
+  async deleteUser(
+    actorUserId: string,
+    targetUserId: string,
+    code?: string,
+  ): Promise<void> {
+    const isSelf = actorUserId === targetUserId;
+    const operation = isSelf ? 'SELF' : 'ADMIN';
+    const target = await this.prisma.user.findUnique({
+      where: { id: targetUserId },
+      select: { id: true },
+    });
+
+    if (!target) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (isSelf) {
+      if (!code) {
+        throw new BadRequestException(
+          'Email confirmation is required to delete your account',
+        );
+      }
+    } else {
+      const roleIds = await this.getRoleIds(actorUserId);
+      const canDeleteUsers = this.rbacService.hasPermission(
+        roleIds,
+        'users',
+        'delete',
+      );
+
+      if (!canDeleteUsers) {
+        throw new ForbiddenException(
+          'User does not have permission to delete this account',
+        );
+      }
+    }
+
+    try {
+      await this.prisma.$transaction(async (transaction) => {
+        if (isSelf) {
+          const verificationCode = await transaction.verificationCode.findFirst(
+            {
+              where: {
+                userId: targetUserId,
+                type: VerificationCodeType.ACCOUNT_DELETION,
+                consumedAt: null,
+              },
+              orderBy: { createdAt: 'desc' },
+            },
+          );
+
+          await this.otpService.verifyCodeById(
+            verificationCode?.id ?? '',
+            VerificationCodeType.ACCOUNT_DELETION,
+            code!,
+          );
+
+          const consumed = await transaction.verificationCode.updateMany({
+            where: {
+              id: verificationCode!.id,
+              userId: targetUserId,
+              type: VerificationCodeType.ACCOUNT_DELETION,
+              consumedAt: null,
+              expiresAt: { gt: new Date() },
+              attempts: { lt: verificationCode!.maxAttempts },
+            },
+            data: { consumedAt: new Date() },
+          });
+
+          if (consumed.count !== 1) {
+            throw new BadRequestException('Invalid or expired code');
+          }
+        }
+
+        await transaction.userRole.deleteMany({
+          where: { userId: targetUserId },
+        });
+
+        await transaction.user.delete({
+          where: { id: targetUserId },
+        });
+      });
+
+      this.logDeletionAudit({
+        actorUserId,
+        targetUserId,
+        operation,
+        result: 'success',
+        reason: 'account_deleted',
+      });
+    } catch (error) {
+      if (
+        error instanceof BadRequestException ||
+        error instanceof ForbiddenException ||
+        error instanceof NotFoundException ||
+        error instanceof ConflictException
+      ) {
+        throw error;
+      }
+
+      this.logDeletionAudit({
+        actorUserId,
+        targetUserId,
+        operation,
+        result: 'failure',
+        reason: 'deletion_failed',
+      });
+
+      const stillExist = await this.prisma.user.findUnique({
+        where: { id: targetUserId },
+        select: { id: true },
+      });
+
+      if (!stillExist) {
+        throw new NotFoundException('User not found');
+      }
+
+      throw new InternalServerErrorException('Unable to delete user account');
+    }
+  }
+
+  private logDeletionAudit(entry: {
+    actorUserId: string;
+    targetUserId: string;
+    operation: 'SELF' | 'ADMIN';
+    result: 'success' | 'failure';
+    reason: string;
+  }): void {
+    this.logger.log(
+      JSON.stringify({
+        event: 'user.account-deletion',
+        ...entry,
+      }),
+    );
+  }
 }

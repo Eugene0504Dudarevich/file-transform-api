@@ -294,3 +294,128 @@ export const ApiConfirmEmailChange = (): MethodDecorator => {
     })(target, propertyKey, descriptor);
   };
 };
+
+export const ApiInitiateAccountDeletion = (): MethodDecorator => {
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) => {
+    ApiOperation({
+      summary: 'Request account deletion confirmation',
+      description:
+        'Sends an OTP to the authenticated user’s current email. Only the account owner may request this confirmation.',
+    })(target, propertyKey, descriptor);
+
+    ApiParam({
+      name: 'userId',
+      type: 'string',
+      description: 'Id of the account to delete',
+      format: 'uuid',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.OK,
+      description: 'Confirmation email requested successfully',
+      schema: {
+        type: 'object',
+        properties: {
+          success: { type: 'boolean', example: true },
+          requiresConfirmation: { type: 'boolean', example: true },
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.BAD_REQUEST,
+      description: 'Invalid user id or resend cooldown',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.UNAUTHORIZED,
+      description: 'Missing, invalid, or expired access JWT',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.FORBIDDEN,
+      description: 'Only the account owner may request confirmation',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NOT_FOUND,
+      description: 'User not found',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.TOO_MANY_REQUESTS,
+      description: 'Too many requests',
+    })(target, propertyKey, descriptor);
+  };
+};
+
+export const ApiAccountDeletion = (): MethodDecorator => {
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) => {
+    ApiOperation({
+      summary: 'Delete a user account',
+      description:
+        'The account owner must provide the OTP sent to their email. Another user may delete the account only with the users.delete RBAC permission.',
+    })(target, propertyKey, descriptor);
+
+    ApiParam({
+      name: 'userId',
+      description: 'Id of the account to delete',
+      format: 'uuid',
+    })(target, propertyKey, descriptor);
+
+    ApiBody({
+      required: false,
+      schema: {
+        type: 'object',
+        properties: {
+          code: {
+            type: 'string',
+            minLength: 6,
+            maxLength: 6,
+            pattern: '^\\d{6}$',
+            example: '123456',
+            description: 'Required when deleting your own account',
+          },
+        },
+      },
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NO_CONTENT,
+      description: 'Account deleted successfully',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.BAD_REQUEST,
+      description: 'Invalid or expired confirmation code',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.UNAUTHORIZED,
+      description: 'Missing, invalid, or expired access JWT',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.FORBIDDEN,
+      description: 'User does not have permission to delete this account',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.NOT_FOUND,
+      description: 'User not found',
+    })(target, propertyKey, descriptor);
+
+    ApiResponse({
+      status: HttpStatus.TOO_MANY_REQUESTS,
+      description: 'Too many requests',
+    })(target, propertyKey, descriptor);
+  };
+};

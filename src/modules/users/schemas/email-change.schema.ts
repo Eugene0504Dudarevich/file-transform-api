@@ -1,9 +1,5 @@
 import { z } from 'zod';
 
-export const emailChangeParamsSchema = z.object({
-  userId: z.uuid(),
-});
-
 export const initiateEmailChangeSchema = z
   .object({
     newEmail: z.email().trim().toLowerCase(),
