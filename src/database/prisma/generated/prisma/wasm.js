@@ -128,7 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   status: 'status',
   emailVerified: 'emailVerified',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  lastLoginAt: 'lastLoginAt'
 };
 
 exports.Prisma.VerificationCodeScalarFieldEnum = {

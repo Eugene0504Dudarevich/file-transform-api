@@ -9,6 +9,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -18,21 +19,25 @@ import { FastifyRequest } from 'fastify';
 import { UsersService } from '../services/users.service';
 import { AuthenticatedUser } from '@/modules/auth/types/authenticated-user.type';
 import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
+import { RequirePermission } from '@/modules/rbac/decorators/require-permission.decorator';
+import { userListQuerySchema } from '../schemas/user-list-query.schema';
 import { userIdParamsSchema } from '../schemas/user-params.schema';
 import { updateUserSchema } from '../schemas/update-user.schema';
 import {
   confirmEmailChangeSchema,
   initiateEmailChangeSchema,
 } from '../schemas/email-change.schema';
+import { confirmAccountDeletionSchema } from '../schemas/delete-user.schema';
 import {
   ApiAccountDeletion,
   ApiConfirmEmailChange,
+  ApiGetUsers,
   ApiInitiateAccountDeletion,
   ApiInitiateEmailChange,
   ApiUpdateUserProfile,
   ApiUserProfile,
-} from '../swagger/user-profile.swagger';
-import { confirmAccountDeletionSchema } from '@/modules/users/schemas/delete-user.schema';
+} from '../swagger/users.swagger';
+import { RbacGuard } from '@/modules/rbac/guards/rbac.guard';
 
 type AuthenticatedFastifyRequest = FastifyRequest & {
   user: AuthenticatedUser;
@@ -43,6 +48,20 @@ type AuthenticatedFastifyRequest = FastifyRequest & {
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  @UseGuards(RbacGuard)
+  @RequirePermission('users', 'read')
+  @ApiGetUsers()
+  async findAll(@Query() query: unknown) {
+    const parsedQuery = userListQuerySchema.safeParse(query);
+
+    if (!parsedQuery.success) {
+      throw new BadRequestException(parsedQuery.error.issues);
+    }
+
+    return await this.usersService.findAll(parsedQuery.data);
+  }
 
   @Get(':userId')
   @ApiUserProfile()

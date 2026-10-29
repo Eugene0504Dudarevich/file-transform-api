@@ -23,7 +23,7 @@ import {
 import { JwtPayload } from '@/modules/auth/types/jwt-payload.type';
 
 @Injectable()
-export class AuthenticationService {
+class AuthenticationService {
   private readonly accessSecret: string;
 
   private readonly refreshSecret: string;
@@ -72,10 +72,14 @@ export class AuthenticationService {
       await this.authSettingService.isLoginVerificationEnabled();
 
     if (!isVerificationEnabled) {
+      const tokens = await this.createTokenPair(user.id, user.email);
+
+      await this.markSuccessfulLogin(user.id);
+
       return {
         success: true,
         requiresConfirmation: false,
-        tokens: await this.createTokenPair(user.id, user.email),
+        tokens,
       };
     }
 
@@ -112,11 +116,23 @@ export class AuthenticationService {
       VerificationCodeType.LOGIN,
     );
 
+    const tokens = await this.createTokenPair(user.id, user.email);
+
+    await this.markSuccessfulLogin(user.id);
+
     return {
       success: true,
       requiresConfirmation: false,
-      tokens: await this.createTokenPair(user.id, user.email),
+      tokens,
     };
+  }
+
+  private async markSuccessfulLogin(userId: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { lastLoginAt: new Date() },
+      select: { id: true },
+    });
   }
 
   async resendLoginCode(input: ResendLoginInput) {
@@ -301,3 +317,5 @@ export class AuthenticationService {
     }
   }
 }
+
+export default AuthenticationService;

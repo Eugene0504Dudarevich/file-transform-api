@@ -8,20 +8,23 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { Prisma } from '@/database/prisma/generated/prisma/client';
+import { z } from 'zod';
+import { EmailService } from '@/common/services/email.service';
+import { OtpService } from '@/common/services/otp.service';
 import { PrismaService } from '@/core/database/prisma.service';
 import { RbacService } from '@/modules/rbac/services/rbac.service';
 import {
   filterUserProfile,
   USER_PROFILE_FIELDS,
 } from '../policies/user-profile.policy';
+import { UserListQuery } from '../schemas/user-list-query.schema';
 import { UpdatedUserInput } from '../schemas/update-user.schema';
 import {
   ConfirmEmailChangeInput,
   InitiateEmailChangeInput,
-} from '@/modules/users/schemas/email-change.schema';
+} from '../schemas/email-change.schema';
 import { VerificationCodeType } from '@/common/types/verification-code.type';
-import { OtpService } from '@/common/services/otp.service';
-import { EmailService } from '@/common/services/email.service';
+import { UserListResponse } from '../types/user-list.type';
 
 @Injectable()
 export class UsersService {
@@ -33,6 +36,90 @@ export class UsersService {
     private readonly prisma: PrismaService,
     private readonly rbacService: RbacService,
   ) {}
+
+  async findAll(query: UserListQuery): Promise<UserListResponse> {
+    const where: Prisma.UserWhereInput = {};
+
+    if (query.status) {
+      where.status = query.status.toUpperCase() as
+        'PENDING' | 'ACTIVE' | 'BLOCKED';
+    }
+
+    if (query.q) {
+      const searchConditions: Prisma.UserWhereInput[] = [
+        {
+          email: {
+            contains: query.q,
+            mode: 'insensitive',
+          },
+        },
+      ];
+
+      if (this.zUuidIsValid(query.q)) {
+        searchConditions.push({ id: query.q });
+      }
+
+      where.OR = searchConditions;
+    }
+
+    const order = query.order;
+
+    const orderBy: Prisma.UserOrderByWithRelationInput[] = [];
+
+    if (query.sort === 'email') {
+      orderBy.push({ email: order }, { id: order });
+    } else if (query.sort === 'last_login') {
+      orderBy.push(
+        { lastLoginAt: { sort: order, nulls: 'last' } },
+        { id: order },
+      );
+    } else {
+      orderBy.push({ createdAt: order }, { id: order });
+    }
+
+    if (query.cursor) {
+      const cursorUser = await this.prisma.user.findUnique({
+        where: { id: query.cursor },
+        select: { id: true },
+      });
+
+      if (!cursorUser) {
+        throw new BadRequestException('Invalid pagination cursor');
+      }
+    }
+
+    const users = await this.prisma.user.findMany({
+      where,
+      orderBy,
+      take: query.limit + 1,
+      ...(query.cursor
+        ? {
+            cursor: { id: query.cursor },
+            skip: 1,
+          }
+        : {}),
+      select: {
+        id: true,
+        email: true,
+        photoUrl: true,
+        createdAt: true,
+        status: true,
+        lastLoginAt: true,
+      },
+    });
+
+    const hasMore = users.length > query.limit;
+    const page = users.slice(0, query.limit);
+
+    return {
+      items: page,
+      nextCursor: hasMore ? (page.at(-1)?.id ?? null) : null,
+    };
+  }
+
+  private zUuidIsValid(value: string): boolean {
+    return z.uuid().safeParse(value).success;
+  }
 
   async getUserProfile(viewerUserId: string, targetUserId: string) {
     const targetUser = await this.prisma.user.findUnique({

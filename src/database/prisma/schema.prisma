@@ -31,8 +31,13 @@ model User {
   emailVerified     DateTime?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  lastLoginAt       DateTime?
   verificationCodes VerificationCode[]
   roles             UserRole[]
+
+  @@index([status, createdAt, id])
+  @@index([createdAt, id])
+  @@index([lastLoginAt, id])
 }
 
 model VerificationCode {

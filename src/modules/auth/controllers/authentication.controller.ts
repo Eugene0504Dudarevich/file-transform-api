@@ -22,7 +22,7 @@ import {
   ResendLoginInput,
   resendLoginSchema,
 } from '../schemas/resend-login.schema';
-import { AuthenticationService } from '../services/authentication.service';
+import AuthenticationService from '../services/authentication.service';
 import { clearAuthCookies, setAuthCookies } from '../utils/auth-cookies';
 import {
   ApiLogin,
