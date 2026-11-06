@@ -34,6 +34,7 @@ model User {
   lastLoginAt       DateTime?
   verificationCodes VerificationCode[]
   roles             UserRole[]
+  conversionAudits  ConversionAudit[]
 
   @@index([status, createdAt, id])
   @@index([createdAt, id])
@@ -103,4 +104,28 @@ model UserRole {
   role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
 
   @@unique([userId, roleId])
+}
+
+model ConversionAudit {
+  id           String @id @default(uuid())
+  userId       String
+  sourceFormat String
+  targetFormat String
+  fileSize     Int
+  success      Boolean
+  errorCode    String?
+  durationMs   Int
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([createdAt])
+}
+
+model ConversionSetting {
+  id               String @id @default(uuid())
+  sourceFormat     String @unique
+  maxFileSizeBytes Int
+  updatedAt        DateTime @updatedAt
 }

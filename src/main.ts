@@ -5,6 +5,7 @@ import {
 } from '@nestjs/platform-fastify';
 import compression from '@fastify/compress';
 import fastifyCookie from '@fastify/cookie';
+import multipart from '@fastify/multipart';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './core/app/app.module';
 import { ConfigService } from '@/core/config/config.service';
@@ -40,6 +41,14 @@ async function bootstrap() {
 
   await app.register(fastifyCookie, {
     secret: configService.get('COOKIE_SECRET'),
+  });
+
+  await app.register(multipart, {
+    limits: {
+      fileSize: 100 * 1024 * 1024,
+      files: 1,
+      fields: 10,
+    },
   });
 
   const port = configService.get('PORT');

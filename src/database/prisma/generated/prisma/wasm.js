@@ -184,6 +184,25 @@ exports.Prisma.UserRoleScalarFieldEnum = {
   roleId: 'roleId'
 };
 
+exports.Prisma.ConversionAuditScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sourceFormat: 'sourceFormat',
+  targetFormat: 'targetFormat',
+  fileSize: 'fileSize',
+  success: 'success',
+  errorCode: 'errorCode',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ConversionSettingScalarFieldEnum = {
+  id: 'id',
+  sourceFormat: 'sourceFormat',
+  maxFileSizeBytes: 'maxFileSizeBytes',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -219,7 +238,9 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   Permission: 'Permission',
   Grant: 'Grant',
-  UserRole: 'UserRole'
+  UserRole: 'UserRole',
+  ConversionAudit: 'ConversionAudit',
+  ConversionSetting: 'ConversionSetting'
 };
 
 /**

@@ -48,6 +48,16 @@ export type Grant = $Result.DefaultSelection<Prisma.$GrantPayload>
  * 
  */
 export type UserRole = $Result.DefaultSelection<Prisma.$UserRolePayload>
+/**
+ * Model ConversionAudit
+ * 
+ */
+export type ConversionAudit = $Result.DefaultSelection<Prisma.$ConversionAuditPayload>
+/**
+ * Model ConversionSetting
+ * 
+ */
+export type ConversionSetting = $Result.DefaultSelection<Prisma.$ConversionSettingPayload>
 
 /**
  * Enums
@@ -269,6 +279,26 @@ export class PrismaClient<
     * ```
     */
   get userRole(): Prisma.UserRoleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversionAudit`: Exposes CRUD operations for the **ConversionAudit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConversionAudits
+    * const conversionAudits = await prisma.conversionAudit.findMany()
+    * ```
+    */
+  get conversionAudit(): Prisma.ConversionAuditDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.conversionSetting`: Exposes CRUD operations for the **ConversionSetting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConversionSettings
+    * const conversionSettings = await prisma.conversionSetting.findMany()
+    * ```
+    */
+  get conversionSetting(): Prisma.ConversionSettingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -715,7 +745,9 @@ export namespace Prisma {
     Role: 'Role',
     Permission: 'Permission',
     Grant: 'Grant',
-    UserRole: 'UserRole'
+    UserRole: 'UserRole',
+    ConversionAudit: 'ConversionAudit',
+    ConversionSetting: 'ConversionSetting'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -734,7 +766,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "verificationCode" | "authSettings" | "role" | "permission" | "grant" | "userRole"
+      modelProps: "user" | "verificationCode" | "authSettings" | "role" | "permission" | "grant" | "userRole" | "conversionAudit" | "conversionSetting"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1256,6 +1288,154 @@ export namespace Prisma {
           }
         }
       }
+      ConversionAudit: {
+        payload: Prisma.$ConversionAuditPayload<ExtArgs>
+        fields: Prisma.ConversionAuditFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversionAuditFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversionAuditFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversionAuditFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversionAuditFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          findMany: {
+            args: Prisma.ConversionAuditFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>[]
+          }
+          create: {
+            args: Prisma.ConversionAuditCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          createMany: {
+            args: Prisma.ConversionAuditCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversionAuditCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversionAuditDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          update: {
+            args: Prisma.ConversionAuditUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversionAuditDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversionAuditUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversionAuditUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversionAuditUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionAuditPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversionAuditAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversionAudit>
+          }
+          groupBy: {
+            args: Prisma.ConversionAuditGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversionAuditGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversionAuditCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversionAuditCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConversionSetting: {
+        payload: Prisma.$ConversionSettingPayload<ExtArgs>
+        fields: Prisma.ConversionSettingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConversionSettingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConversionSettingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          findFirst: {
+            args: Prisma.ConversionSettingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConversionSettingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          findMany: {
+            args: Prisma.ConversionSettingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>[]
+          }
+          create: {
+            args: Prisma.ConversionSettingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          createMany: {
+            args: Prisma.ConversionSettingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ConversionSettingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>[]
+          }
+          delete: {
+            args: Prisma.ConversionSettingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          update: {
+            args: Prisma.ConversionSettingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConversionSettingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConversionSettingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ConversionSettingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>[]
+          }
+          upsert: {
+            args: Prisma.ConversionSettingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConversionSettingPayload>
+          }
+          aggregate: {
+            args: Prisma.ConversionSettingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConversionSetting>
+          }
+          groupBy: {
+            args: Prisma.ConversionSettingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConversionSettingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConversionSettingCountArgs<ExtArgs>
+            result: $Utils.Optional<ConversionSettingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1355,6 +1535,8 @@ export namespace Prisma {
     permission?: PermissionOmit
     grant?: GrantOmit
     userRole?: UserRoleOmit
+    conversionAudit?: ConversionAuditOmit
+    conversionSetting?: ConversionSettingOmit
   }
 
   /* Types for Logging */
@@ -1437,11 +1619,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     verificationCodes: number
     roles: number
+    conversionAudits: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     verificationCodes?: boolean | UserCountOutputTypeCountVerificationCodesArgs
     roles?: boolean | UserCountOutputTypeCountRolesArgs
+    conversionAudits?: boolean | UserCountOutputTypeCountConversionAuditsArgs
   }
 
   // Custom InputTypes
@@ -1467,6 +1651,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRoleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountConversionAuditsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversionAuditWhereInput
   }
 
 
@@ -1743,6 +1934,7 @@ export namespace Prisma {
     lastLoginAt?: boolean
     verificationCodes?: boolean | User$verificationCodesArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
+    conversionAudits?: boolean | User$conversionAuditsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1786,6 +1978,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     verificationCodes?: boolean | User$verificationCodesArgs<ExtArgs>
     roles?: boolean | User$rolesArgs<ExtArgs>
+    conversionAudits?: boolean | User$conversionAuditsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1796,6 +1989,7 @@ export namespace Prisma {
     objects: {
       verificationCodes: Prisma.$VerificationCodePayload<ExtArgs>[]
       roles: Prisma.$UserRolePayload<ExtArgs>[]
+      conversionAudits: Prisma.$ConversionAuditPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2203,6 +2397,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     verificationCodes<T extends User$verificationCodesArgs<ExtArgs> = {}>(args?: Subset<T, User$verificationCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     roles<T extends User$rolesArgs<ExtArgs> = {}>(args?: Subset<T, User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    conversionAudits<T extends User$conversionAuditsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversionAuditsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2674,6 +2869,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
+  }
+
+  /**
+   * User.conversionAudits
+   */
+  export type User$conversionAuditsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    where?: ConversionAuditWhereInput
+    orderBy?: ConversionAuditOrderByWithRelationInput | ConversionAuditOrderByWithRelationInput[]
+    cursor?: ConversionAuditWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversionAuditScalarFieldEnum | ConversionAuditScalarFieldEnum[]
   }
 
   /**
@@ -9131,6 +9350,2170 @@ export namespace Prisma {
 
 
   /**
+   * Model ConversionAudit
+   */
+
+  export type AggregateConversionAudit = {
+    _count: ConversionAuditCountAggregateOutputType | null
+    _avg: ConversionAuditAvgAggregateOutputType | null
+    _sum: ConversionAuditSumAggregateOutputType | null
+    _min: ConversionAuditMinAggregateOutputType | null
+    _max: ConversionAuditMaxAggregateOutputType | null
+  }
+
+  export type ConversionAuditAvgAggregateOutputType = {
+    fileSize: number | null
+    durationMs: number | null
+  }
+
+  export type ConversionAuditSumAggregateOutputType = {
+    fileSize: number | null
+    durationMs: number | null
+  }
+
+  export type ConversionAuditMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    sourceFormat: string | null
+    targetFormat: string | null
+    fileSize: number | null
+    success: boolean | null
+    errorCode: string | null
+    durationMs: number | null
+    createdAt: Date | null
+  }
+
+  export type ConversionAuditMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    sourceFormat: string | null
+    targetFormat: string | null
+    fileSize: number | null
+    success: boolean | null
+    errorCode: string | null
+    durationMs: number | null
+    createdAt: Date | null
+  }
+
+  export type ConversionAuditCountAggregateOutputType = {
+    id: number
+    userId: number
+    sourceFormat: number
+    targetFormat: number
+    fileSize: number
+    success: number
+    errorCode: number
+    durationMs: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ConversionAuditAvgAggregateInputType = {
+    fileSize?: true
+    durationMs?: true
+  }
+
+  export type ConversionAuditSumAggregateInputType = {
+    fileSize?: true
+    durationMs?: true
+  }
+
+  export type ConversionAuditMinAggregateInputType = {
+    id?: true
+    userId?: true
+    sourceFormat?: true
+    targetFormat?: true
+    fileSize?: true
+    success?: true
+    errorCode?: true
+    durationMs?: true
+    createdAt?: true
+  }
+
+  export type ConversionAuditMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    sourceFormat?: true
+    targetFormat?: true
+    fileSize?: true
+    success?: true
+    errorCode?: true
+    durationMs?: true
+    createdAt?: true
+  }
+
+  export type ConversionAuditCountAggregateInputType = {
+    id?: true
+    userId?: true
+    sourceFormat?: true
+    targetFormat?: true
+    fileSize?: true
+    success?: true
+    errorCode?: true
+    durationMs?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ConversionAuditAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionAudit to aggregate.
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionAudits to fetch.
+     */
+    orderBy?: ConversionAuditOrderByWithRelationInput | ConversionAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversionAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConversionAudits
+    **/
+    _count?: true | ConversionAuditCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConversionAuditAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConversionAuditSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversionAuditMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversionAuditMaxAggregateInputType
+  }
+
+  export type GetConversionAuditAggregateType<T extends ConversionAuditAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversionAudit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversionAudit[P]>
+      : GetScalarType<T[P], AggregateConversionAudit[P]>
+  }
+
+
+
+
+  export type ConversionAuditGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversionAuditWhereInput
+    orderBy?: ConversionAuditOrderByWithAggregationInput | ConversionAuditOrderByWithAggregationInput[]
+    by: ConversionAuditScalarFieldEnum[] | ConversionAuditScalarFieldEnum
+    having?: ConversionAuditScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversionAuditCountAggregateInputType | true
+    _avg?: ConversionAuditAvgAggregateInputType
+    _sum?: ConversionAuditSumAggregateInputType
+    _min?: ConversionAuditMinAggregateInputType
+    _max?: ConversionAuditMaxAggregateInputType
+  }
+
+  export type ConversionAuditGroupByOutputType = {
+    id: string
+    userId: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode: string | null
+    durationMs: number
+    createdAt: Date
+    _count: ConversionAuditCountAggregateOutputType | null
+    _avg: ConversionAuditAvgAggregateOutputType | null
+    _sum: ConversionAuditSumAggregateOutputType | null
+    _min: ConversionAuditMinAggregateOutputType | null
+    _max: ConversionAuditMaxAggregateOutputType | null
+  }
+
+  type GetConversionAuditGroupByPayload<T extends ConversionAuditGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversionAuditGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversionAuditGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversionAuditGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversionAuditGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversionAuditSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sourceFormat?: boolean
+    targetFormat?: boolean
+    fileSize?: boolean
+    success?: boolean
+    errorCode?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionAudit"]>
+
+  export type ConversionAuditSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sourceFormat?: boolean
+    targetFormat?: boolean
+    fileSize?: boolean
+    success?: boolean
+    errorCode?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionAudit"]>
+
+  export type ConversionAuditSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    sourceFormat?: boolean
+    targetFormat?: boolean
+    fileSize?: boolean
+    success?: boolean
+    errorCode?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conversionAudit"]>
+
+  export type ConversionAuditSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    sourceFormat?: boolean
+    targetFormat?: boolean
+    fileSize?: boolean
+    success?: boolean
+    errorCode?: boolean
+    durationMs?: boolean
+    createdAt?: boolean
+  }
+
+  export type ConversionAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "sourceFormat" | "targetFormat" | "fileSize" | "success" | "errorCode" | "durationMs" | "createdAt", ExtArgs["result"]["conversionAudit"]>
+  export type ConversionAuditInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ConversionAuditIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ConversionAuditIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ConversionAuditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConversionAudit"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      sourceFormat: string
+      targetFormat: string
+      fileSize: number
+      success: boolean
+      errorCode: string | null
+      durationMs: number
+      createdAt: Date
+    }, ExtArgs["result"]["conversionAudit"]>
+    composites: {}
+  }
+
+  type ConversionAuditGetPayload<S extends boolean | null | undefined | ConversionAuditDefaultArgs> = $Result.GetResult<Prisma.$ConversionAuditPayload, S>
+
+  type ConversionAuditCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversionAuditFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversionAuditCountAggregateInputType | true
+    }
+
+  export interface ConversionAuditDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConversionAudit'], meta: { name: 'ConversionAudit' } }
+    /**
+     * Find zero or one ConversionAudit that matches the filter.
+     * @param {ConversionAuditFindUniqueArgs} args - Arguments to find a ConversionAudit
+     * @example
+     * // Get one ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversionAuditFindUniqueArgs>(args: SelectSubset<T, ConversionAuditFindUniqueArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConversionAudit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversionAuditFindUniqueOrThrowArgs} args - Arguments to find a ConversionAudit
+     * @example
+     * // Get one ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversionAuditFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversionAuditFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionAudit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditFindFirstArgs} args - Arguments to find a ConversionAudit
+     * @example
+     * // Get one ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversionAuditFindFirstArgs>(args?: SelectSubset<T, ConversionAuditFindFirstArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionAudit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditFindFirstOrThrowArgs} args - Arguments to find a ConversionAudit
+     * @example
+     * // Get one ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversionAuditFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversionAuditFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConversionAudits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConversionAudits
+     * const conversionAudits = await prisma.conversionAudit.findMany()
+     * 
+     * // Get first 10 ConversionAudits
+     * const conversionAudits = await prisma.conversionAudit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversionAuditWithIdOnly = await prisma.conversionAudit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversionAuditFindManyArgs>(args?: SelectSubset<T, ConversionAuditFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConversionAudit.
+     * @param {ConversionAuditCreateArgs} args - Arguments to create a ConversionAudit.
+     * @example
+     * // Create one ConversionAudit
+     * const ConversionAudit = await prisma.conversionAudit.create({
+     *   data: {
+     *     // ... data to create a ConversionAudit
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversionAuditCreateArgs>(args: SelectSubset<T, ConversionAuditCreateArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConversionAudits.
+     * @param {ConversionAuditCreateManyArgs} args - Arguments to create many ConversionAudits.
+     * @example
+     * // Create many ConversionAudits
+     * const conversionAudit = await prisma.conversionAudit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversionAuditCreateManyArgs>(args?: SelectSubset<T, ConversionAuditCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConversionAudits and returns the data saved in the database.
+     * @param {ConversionAuditCreateManyAndReturnArgs} args - Arguments to create many ConversionAudits.
+     * @example
+     * // Create many ConversionAudits
+     * const conversionAudit = await prisma.conversionAudit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConversionAudits and only return the `id`
+     * const conversionAuditWithIdOnly = await prisma.conversionAudit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversionAuditCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversionAuditCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConversionAudit.
+     * @param {ConversionAuditDeleteArgs} args - Arguments to delete one ConversionAudit.
+     * @example
+     * // Delete one ConversionAudit
+     * const ConversionAudit = await prisma.conversionAudit.delete({
+     *   where: {
+     *     // ... filter to delete one ConversionAudit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversionAuditDeleteArgs>(args: SelectSubset<T, ConversionAuditDeleteArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConversionAudit.
+     * @param {ConversionAuditUpdateArgs} args - Arguments to update one ConversionAudit.
+     * @example
+     * // Update one ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversionAuditUpdateArgs>(args: SelectSubset<T, ConversionAuditUpdateArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConversionAudits.
+     * @param {ConversionAuditDeleteManyArgs} args - Arguments to filter ConversionAudits to delete.
+     * @example
+     * // Delete a few ConversionAudits
+     * const { count } = await prisma.conversionAudit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversionAuditDeleteManyArgs>(args?: SelectSubset<T, ConversionAuditDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionAudits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConversionAudits
+     * const conversionAudit = await prisma.conversionAudit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversionAuditUpdateManyArgs>(args: SelectSubset<T, ConversionAuditUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionAudits and returns the data updated in the database.
+     * @param {ConversionAuditUpdateManyAndReturnArgs} args - Arguments to update many ConversionAudits.
+     * @example
+     * // Update many ConversionAudits
+     * const conversionAudit = await prisma.conversionAudit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConversionAudits and only return the `id`
+     * const conversionAuditWithIdOnly = await prisma.conversionAudit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversionAuditUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversionAuditUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConversionAudit.
+     * @param {ConversionAuditUpsertArgs} args - Arguments to update or create a ConversionAudit.
+     * @example
+     * // Update or create a ConversionAudit
+     * const conversionAudit = await prisma.conversionAudit.upsert({
+     *   create: {
+     *     // ... data to create a ConversionAudit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConversionAudit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversionAuditUpsertArgs>(args: SelectSubset<T, ConversionAuditUpsertArgs<ExtArgs>>): Prisma__ConversionAuditClient<$Result.GetResult<Prisma.$ConversionAuditPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConversionAudits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditCountArgs} args - Arguments to filter ConversionAudits to count.
+     * @example
+     * // Count the number of ConversionAudits
+     * const count = await prisma.conversionAudit.count({
+     *   where: {
+     *     // ... the filter for the ConversionAudits we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversionAuditCountArgs>(
+      args?: Subset<T, ConversionAuditCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversionAuditCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConversionAudit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversionAuditAggregateArgs>(args: Subset<T, ConversionAuditAggregateArgs>): Prisma.PrismaPromise<GetConversionAuditAggregateType<T>>
+
+    /**
+     * Group by ConversionAudit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionAuditGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversionAuditGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversionAuditGroupByArgs['orderBy'] }
+        : { orderBy?: ConversionAuditGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversionAuditGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversionAuditGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConversionAudit model
+   */
+  readonly fields: ConversionAuditFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConversionAudit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversionAuditClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConversionAudit model
+   */
+  interface ConversionAuditFieldRefs {
+    readonly id: FieldRef<"ConversionAudit", 'String'>
+    readonly userId: FieldRef<"ConversionAudit", 'String'>
+    readonly sourceFormat: FieldRef<"ConversionAudit", 'String'>
+    readonly targetFormat: FieldRef<"ConversionAudit", 'String'>
+    readonly fileSize: FieldRef<"ConversionAudit", 'Int'>
+    readonly success: FieldRef<"ConversionAudit", 'Boolean'>
+    readonly errorCode: FieldRef<"ConversionAudit", 'String'>
+    readonly durationMs: FieldRef<"ConversionAudit", 'Int'>
+    readonly createdAt: FieldRef<"ConversionAudit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConversionAudit findUnique
+   */
+  export type ConversionAuditFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionAudit to fetch.
+     */
+    where: ConversionAuditWhereUniqueInput
+  }
+
+  /**
+   * ConversionAudit findUniqueOrThrow
+   */
+  export type ConversionAuditFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionAudit to fetch.
+     */
+    where: ConversionAuditWhereUniqueInput
+  }
+
+  /**
+   * ConversionAudit findFirst
+   */
+  export type ConversionAuditFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionAudit to fetch.
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionAudits to fetch.
+     */
+    orderBy?: ConversionAuditOrderByWithRelationInput | ConversionAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionAudits.
+     */
+    cursor?: ConversionAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionAudits.
+     */
+    distinct?: ConversionAuditScalarFieldEnum | ConversionAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionAudit findFirstOrThrow
+   */
+  export type ConversionAuditFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionAudit to fetch.
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionAudits to fetch.
+     */
+    orderBy?: ConversionAuditOrderByWithRelationInput | ConversionAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionAudits.
+     */
+    cursor?: ConversionAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionAudits.
+     */
+    distinct?: ConversionAuditScalarFieldEnum | ConversionAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionAudit findMany
+   */
+  export type ConversionAuditFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ConversionAudits to fetch.
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionAudits to fetch.
+     */
+    orderBy?: ConversionAuditOrderByWithRelationInput | ConversionAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConversionAudits.
+     */
+    cursor?: ConversionAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionAudits.
+     */
+    skip?: number
+    distinct?: ConversionAuditScalarFieldEnum | ConversionAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionAudit create
+   */
+  export type ConversionAuditCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConversionAudit.
+     */
+    data: XOR<ConversionAuditCreateInput, ConversionAuditUncheckedCreateInput>
+  }
+
+  /**
+   * ConversionAudit createMany
+   */
+  export type ConversionAuditCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConversionAudits.
+     */
+    data: ConversionAuditCreateManyInput | ConversionAuditCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConversionAudit createManyAndReturn
+   */
+  export type ConversionAuditCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConversionAudits.
+     */
+    data: ConversionAuditCreateManyInput | ConversionAuditCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversionAudit update
+   */
+  export type ConversionAuditUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConversionAudit.
+     */
+    data: XOR<ConversionAuditUpdateInput, ConversionAuditUncheckedUpdateInput>
+    /**
+     * Choose, which ConversionAudit to update.
+     */
+    where: ConversionAuditWhereUniqueInput
+  }
+
+  /**
+   * ConversionAudit updateMany
+   */
+  export type ConversionAuditUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConversionAudits.
+     */
+    data: XOR<ConversionAuditUpdateManyMutationInput, ConversionAuditUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionAudits to update
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * Limit how many ConversionAudits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionAudit updateManyAndReturn
+   */
+  export type ConversionAuditUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * The data used to update ConversionAudits.
+     */
+    data: XOR<ConversionAuditUpdateManyMutationInput, ConversionAuditUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionAudits to update
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * Limit how many ConversionAudits to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ConversionAudit upsert
+   */
+  export type ConversionAuditUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConversionAudit to update in case it exists.
+     */
+    where: ConversionAuditWhereUniqueInput
+    /**
+     * In case the ConversionAudit found by the `where` argument doesn't exist, create a new ConversionAudit with this data.
+     */
+    create: XOR<ConversionAuditCreateInput, ConversionAuditUncheckedCreateInput>
+    /**
+     * In case the ConversionAudit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversionAuditUpdateInput, ConversionAuditUncheckedUpdateInput>
+  }
+
+  /**
+   * ConversionAudit delete
+   */
+  export type ConversionAuditDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+    /**
+     * Filter which ConversionAudit to delete.
+     */
+    where: ConversionAuditWhereUniqueInput
+  }
+
+  /**
+   * ConversionAudit deleteMany
+   */
+  export type ConversionAuditDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionAudits to delete
+     */
+    where?: ConversionAuditWhereInput
+    /**
+     * Limit how many ConversionAudits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionAudit without action
+   */
+  export type ConversionAuditDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionAudit
+     */
+    select?: ConversionAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionAudit
+     */
+    omit?: ConversionAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversionAuditInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConversionSetting
+   */
+
+  export type AggregateConversionSetting = {
+    _count: ConversionSettingCountAggregateOutputType | null
+    _avg: ConversionSettingAvgAggregateOutputType | null
+    _sum: ConversionSettingSumAggregateOutputType | null
+    _min: ConversionSettingMinAggregateOutputType | null
+    _max: ConversionSettingMaxAggregateOutputType | null
+  }
+
+  export type ConversionSettingAvgAggregateOutputType = {
+    maxFileSizeBytes: number | null
+  }
+
+  export type ConversionSettingSumAggregateOutputType = {
+    maxFileSizeBytes: number | null
+  }
+
+  export type ConversionSettingMinAggregateOutputType = {
+    id: string | null
+    sourceFormat: string | null
+    maxFileSizeBytes: number | null
+    updatedAt: Date | null
+  }
+
+  export type ConversionSettingMaxAggregateOutputType = {
+    id: string | null
+    sourceFormat: string | null
+    maxFileSizeBytes: number | null
+    updatedAt: Date | null
+  }
+
+  export type ConversionSettingCountAggregateOutputType = {
+    id: number
+    sourceFormat: number
+    maxFileSizeBytes: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ConversionSettingAvgAggregateInputType = {
+    maxFileSizeBytes?: true
+  }
+
+  export type ConversionSettingSumAggregateInputType = {
+    maxFileSizeBytes?: true
+  }
+
+  export type ConversionSettingMinAggregateInputType = {
+    id?: true
+    sourceFormat?: true
+    maxFileSizeBytes?: true
+    updatedAt?: true
+  }
+
+  export type ConversionSettingMaxAggregateInputType = {
+    id?: true
+    sourceFormat?: true
+    maxFileSizeBytes?: true
+    updatedAt?: true
+  }
+
+  export type ConversionSettingCountAggregateInputType = {
+    id?: true
+    sourceFormat?: true
+    maxFileSizeBytes?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ConversionSettingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionSetting to aggregate.
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionSettings to fetch.
+     */
+    orderBy?: ConversionSettingOrderByWithRelationInput | ConversionSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConversionSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConversionSettings
+    **/
+    _count?: true | ConversionSettingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ConversionSettingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConversionSettingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConversionSettingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConversionSettingMaxAggregateInputType
+  }
+
+  export type GetConversionSettingAggregateType<T extends ConversionSettingAggregateArgs> = {
+        [P in keyof T & keyof AggregateConversionSetting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConversionSetting[P]>
+      : GetScalarType<T[P], AggregateConversionSetting[P]>
+  }
+
+
+
+
+  export type ConversionSettingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversionSettingWhereInput
+    orderBy?: ConversionSettingOrderByWithAggregationInput | ConversionSettingOrderByWithAggregationInput[]
+    by: ConversionSettingScalarFieldEnum[] | ConversionSettingScalarFieldEnum
+    having?: ConversionSettingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConversionSettingCountAggregateInputType | true
+    _avg?: ConversionSettingAvgAggregateInputType
+    _sum?: ConversionSettingSumAggregateInputType
+    _min?: ConversionSettingMinAggregateInputType
+    _max?: ConversionSettingMaxAggregateInputType
+  }
+
+  export type ConversionSettingGroupByOutputType = {
+    id: string
+    sourceFormat: string
+    maxFileSizeBytes: number
+    updatedAt: Date
+    _count: ConversionSettingCountAggregateOutputType | null
+    _avg: ConversionSettingAvgAggregateOutputType | null
+    _sum: ConversionSettingSumAggregateOutputType | null
+    _min: ConversionSettingMinAggregateOutputType | null
+    _max: ConversionSettingMaxAggregateOutputType | null
+  }
+
+  type GetConversionSettingGroupByPayload<T extends ConversionSettingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConversionSettingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConversionSettingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConversionSettingGroupByOutputType[P]>
+            : GetScalarType<T[P], ConversionSettingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConversionSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sourceFormat?: boolean
+    maxFileSizeBytes?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["conversionSetting"]>
+
+  export type ConversionSettingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sourceFormat?: boolean
+    maxFileSizeBytes?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["conversionSetting"]>
+
+  export type ConversionSettingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sourceFormat?: boolean
+    maxFileSizeBytes?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["conversionSetting"]>
+
+  export type ConversionSettingSelectScalar = {
+    id?: boolean
+    sourceFormat?: boolean
+    maxFileSizeBytes?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ConversionSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sourceFormat" | "maxFileSizeBytes" | "updatedAt", ExtArgs["result"]["conversionSetting"]>
+
+  export type $ConversionSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConversionSetting"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sourceFormat: string
+      maxFileSizeBytes: number
+      updatedAt: Date
+    }, ExtArgs["result"]["conversionSetting"]>
+    composites: {}
+  }
+
+  type ConversionSettingGetPayload<S extends boolean | null | undefined | ConversionSettingDefaultArgs> = $Result.GetResult<Prisma.$ConversionSettingPayload, S>
+
+  type ConversionSettingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ConversionSettingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ConversionSettingCountAggregateInputType | true
+    }
+
+  export interface ConversionSettingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConversionSetting'], meta: { name: 'ConversionSetting' } }
+    /**
+     * Find zero or one ConversionSetting that matches the filter.
+     * @param {ConversionSettingFindUniqueArgs} args - Arguments to find a ConversionSetting
+     * @example
+     * // Get one ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConversionSettingFindUniqueArgs>(args: SelectSubset<T, ConversionSettingFindUniqueArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ConversionSetting that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ConversionSettingFindUniqueOrThrowArgs} args - Arguments to find a ConversionSetting
+     * @example
+     * // Get one ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConversionSettingFindUniqueOrThrowArgs>(args: SelectSubset<T, ConversionSettingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionSetting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingFindFirstArgs} args - Arguments to find a ConversionSetting
+     * @example
+     * // Get one ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConversionSettingFindFirstArgs>(args?: SelectSubset<T, ConversionSettingFindFirstArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ConversionSetting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingFindFirstOrThrowArgs} args - Arguments to find a ConversionSetting
+     * @example
+     * // Get one ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConversionSettingFindFirstOrThrowArgs>(args?: SelectSubset<T, ConversionSettingFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ConversionSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConversionSettings
+     * const conversionSettings = await prisma.conversionSetting.findMany()
+     * 
+     * // Get first 10 ConversionSettings
+     * const conversionSettings = await prisma.conversionSetting.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conversionSettingWithIdOnly = await prisma.conversionSetting.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConversionSettingFindManyArgs>(args?: SelectSubset<T, ConversionSettingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ConversionSetting.
+     * @param {ConversionSettingCreateArgs} args - Arguments to create a ConversionSetting.
+     * @example
+     * // Create one ConversionSetting
+     * const ConversionSetting = await prisma.conversionSetting.create({
+     *   data: {
+     *     // ... data to create a ConversionSetting
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConversionSettingCreateArgs>(args: SelectSubset<T, ConversionSettingCreateArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ConversionSettings.
+     * @param {ConversionSettingCreateManyArgs} args - Arguments to create many ConversionSettings.
+     * @example
+     * // Create many ConversionSettings
+     * const conversionSetting = await prisma.conversionSetting.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConversionSettingCreateManyArgs>(args?: SelectSubset<T, ConversionSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ConversionSettings and returns the data saved in the database.
+     * @param {ConversionSettingCreateManyAndReturnArgs} args - Arguments to create many ConversionSettings.
+     * @example
+     * // Create many ConversionSettings
+     * const conversionSetting = await prisma.conversionSetting.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ConversionSettings and only return the `id`
+     * const conversionSettingWithIdOnly = await prisma.conversionSetting.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ConversionSettingCreateManyAndReturnArgs>(args?: SelectSubset<T, ConversionSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ConversionSetting.
+     * @param {ConversionSettingDeleteArgs} args - Arguments to delete one ConversionSetting.
+     * @example
+     * // Delete one ConversionSetting
+     * const ConversionSetting = await prisma.conversionSetting.delete({
+     *   where: {
+     *     // ... filter to delete one ConversionSetting
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConversionSettingDeleteArgs>(args: SelectSubset<T, ConversionSettingDeleteArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ConversionSetting.
+     * @param {ConversionSettingUpdateArgs} args - Arguments to update one ConversionSetting.
+     * @example
+     * // Update one ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConversionSettingUpdateArgs>(args: SelectSubset<T, ConversionSettingUpdateArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ConversionSettings.
+     * @param {ConversionSettingDeleteManyArgs} args - Arguments to filter ConversionSettings to delete.
+     * @example
+     * // Delete a few ConversionSettings
+     * const { count } = await prisma.conversionSetting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConversionSettingDeleteManyArgs>(args?: SelectSubset<T, ConversionSettingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConversionSettings
+     * const conversionSetting = await prisma.conversionSetting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConversionSettingUpdateManyArgs>(args: SelectSubset<T, ConversionSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConversionSettings and returns the data updated in the database.
+     * @param {ConversionSettingUpdateManyAndReturnArgs} args - Arguments to update many ConversionSettings.
+     * @example
+     * // Update many ConversionSettings
+     * const conversionSetting = await prisma.conversionSetting.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ConversionSettings and only return the `id`
+     * const conversionSettingWithIdOnly = await prisma.conversionSetting.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ConversionSettingUpdateManyAndReturnArgs>(args: SelectSubset<T, ConversionSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ConversionSetting.
+     * @param {ConversionSettingUpsertArgs} args - Arguments to update or create a ConversionSetting.
+     * @example
+     * // Update or create a ConversionSetting
+     * const conversionSetting = await prisma.conversionSetting.upsert({
+     *   create: {
+     *     // ... data to create a ConversionSetting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConversionSetting we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConversionSettingUpsertArgs>(args: SelectSubset<T, ConversionSettingUpsertArgs<ExtArgs>>): Prisma__ConversionSettingClient<$Result.GetResult<Prisma.$ConversionSettingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ConversionSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingCountArgs} args - Arguments to filter ConversionSettings to count.
+     * @example
+     * // Count the number of ConversionSettings
+     * const count = await prisma.conversionSetting.count({
+     *   where: {
+     *     // ... the filter for the ConversionSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConversionSettingCountArgs>(
+      args?: Subset<T, ConversionSettingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConversionSettingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConversionSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConversionSettingAggregateArgs>(args: Subset<T, ConversionSettingAggregateArgs>): Prisma.PrismaPromise<GetConversionSettingAggregateType<T>>
+
+    /**
+     * Group by ConversionSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConversionSettingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConversionSettingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConversionSettingGroupByArgs['orderBy'] }
+        : { orderBy?: ConversionSettingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConversionSettingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConversionSettingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConversionSetting model
+   */
+  readonly fields: ConversionSettingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConversionSetting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConversionSettingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConversionSetting model
+   */
+  interface ConversionSettingFieldRefs {
+    readonly id: FieldRef<"ConversionSetting", 'String'>
+    readonly sourceFormat: FieldRef<"ConversionSetting", 'String'>
+    readonly maxFileSizeBytes: FieldRef<"ConversionSetting", 'Int'>
+    readonly updatedAt: FieldRef<"ConversionSetting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConversionSetting findUnique
+   */
+  export type ConversionSettingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which ConversionSetting to fetch.
+     */
+    where: ConversionSettingWhereUniqueInput
+  }
+
+  /**
+   * ConversionSetting findUniqueOrThrow
+   */
+  export type ConversionSettingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which ConversionSetting to fetch.
+     */
+    where: ConversionSettingWhereUniqueInput
+  }
+
+  /**
+   * ConversionSetting findFirst
+   */
+  export type ConversionSettingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which ConversionSetting to fetch.
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionSettings to fetch.
+     */
+    orderBy?: ConversionSettingOrderByWithRelationInput | ConversionSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionSettings.
+     */
+    cursor?: ConversionSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionSettings.
+     */
+    distinct?: ConversionSettingScalarFieldEnum | ConversionSettingScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionSetting findFirstOrThrow
+   */
+  export type ConversionSettingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which ConversionSetting to fetch.
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionSettings to fetch.
+     */
+    orderBy?: ConversionSettingOrderByWithRelationInput | ConversionSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConversionSettings.
+     */
+    cursor?: ConversionSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConversionSettings.
+     */
+    distinct?: ConversionSettingScalarFieldEnum | ConversionSettingScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionSetting findMany
+   */
+  export type ConversionSettingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which ConversionSettings to fetch.
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConversionSettings to fetch.
+     */
+    orderBy?: ConversionSettingOrderByWithRelationInput | ConversionSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConversionSettings.
+     */
+    cursor?: ConversionSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConversionSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConversionSettings.
+     */
+    skip?: number
+    distinct?: ConversionSettingScalarFieldEnum | ConversionSettingScalarFieldEnum[]
+  }
+
+  /**
+   * ConversionSetting create
+   */
+  export type ConversionSettingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ConversionSetting.
+     */
+    data: XOR<ConversionSettingCreateInput, ConversionSettingUncheckedCreateInput>
+  }
+
+  /**
+   * ConversionSetting createMany
+   */
+  export type ConversionSettingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConversionSettings.
+     */
+    data: ConversionSettingCreateManyInput | ConversionSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConversionSetting createManyAndReturn
+   */
+  export type ConversionSettingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * The data used to create many ConversionSettings.
+     */
+    data: ConversionSettingCreateManyInput | ConversionSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConversionSetting update
+   */
+  export type ConversionSettingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ConversionSetting.
+     */
+    data: XOR<ConversionSettingUpdateInput, ConversionSettingUncheckedUpdateInput>
+    /**
+     * Choose, which ConversionSetting to update.
+     */
+    where: ConversionSettingWhereUniqueInput
+  }
+
+  /**
+   * ConversionSetting updateMany
+   */
+  export type ConversionSettingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConversionSettings.
+     */
+    data: XOR<ConversionSettingUpdateManyMutationInput, ConversionSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionSettings to update
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * Limit how many ConversionSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionSetting updateManyAndReturn
+   */
+  export type ConversionSettingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * The data used to update ConversionSettings.
+     */
+    data: XOR<ConversionSettingUpdateManyMutationInput, ConversionSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which ConversionSettings to update
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * Limit how many ConversionSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionSetting upsert
+   */
+  export type ConversionSettingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ConversionSetting to update in case it exists.
+     */
+    where: ConversionSettingWhereUniqueInput
+    /**
+     * In case the ConversionSetting found by the `where` argument doesn't exist, create a new ConversionSetting with this data.
+     */
+    create: XOR<ConversionSettingCreateInput, ConversionSettingUncheckedCreateInput>
+    /**
+     * In case the ConversionSetting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConversionSettingUpdateInput, ConversionSettingUncheckedUpdateInput>
+  }
+
+  /**
+   * ConversionSetting delete
+   */
+  export type ConversionSettingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+    /**
+     * Filter which ConversionSetting to delete.
+     */
+    where: ConversionSettingWhereUniqueInput
+  }
+
+  /**
+   * ConversionSetting deleteMany
+   */
+  export type ConversionSettingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConversionSettings to delete
+     */
+    where?: ConversionSettingWhereInput
+    /**
+     * Limit how many ConversionSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ConversionSetting without action
+   */
+  export type ConversionSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConversionSetting
+     */
+    select?: ConversionSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ConversionSetting
+     */
+    omit?: ConversionSettingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9227,6 +11610,31 @@ export namespace Prisma {
   };
 
   export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+  export const ConversionAuditScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    sourceFormat: 'sourceFormat',
+    targetFormat: 'targetFormat',
+    fileSize: 'fileSize',
+    success: 'success',
+    errorCode: 'errorCode',
+    durationMs: 'durationMs',
+    createdAt: 'createdAt'
+  };
+
+  export type ConversionAuditScalarFieldEnum = (typeof ConversionAuditScalarFieldEnum)[keyof typeof ConversionAuditScalarFieldEnum]
+
+
+  export const ConversionSettingScalarFieldEnum: {
+    id: 'id',
+    sourceFormat: 'sourceFormat',
+    maxFileSizeBytes: 'maxFileSizeBytes',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ConversionSettingScalarFieldEnum = (typeof ConversionSettingScalarFieldEnum)[keyof typeof ConversionSettingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9367,6 +11775,7 @@ export namespace Prisma {
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
     verificationCodes?: VerificationCodeListRelationFilter
     roles?: UserRoleListRelationFilter
+    conversionAudits?: ConversionAuditListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9381,6 +11790,7 @@ export namespace Prisma {
     lastLoginAt?: SortOrderInput | SortOrder
     verificationCodes?: VerificationCodeOrderByRelationAggregateInput
     roles?: UserRoleOrderByRelationAggregateInput
+    conversionAudits?: ConversionAuditOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9398,6 +11808,7 @@ export namespace Prisma {
     lastLoginAt?: DateTimeNullableFilter<"User"> | Date | string | null
     verificationCodes?: VerificationCodeListRelationFilter
     roles?: UserRoleListRelationFilter
+    conversionAudits?: ConversionAuditListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9790,6 +12201,132 @@ export namespace Prisma {
     roleId?: StringWithAggregatesFilter<"UserRole"> | string
   }
 
+  export type ConversionAuditWhereInput = {
+    AND?: ConversionAuditWhereInput | ConversionAuditWhereInput[]
+    OR?: ConversionAuditWhereInput[]
+    NOT?: ConversionAuditWhereInput | ConversionAuditWhereInput[]
+    id?: StringFilter<"ConversionAudit"> | string
+    userId?: StringFilter<"ConversionAudit"> | string
+    sourceFormat?: StringFilter<"ConversionAudit"> | string
+    targetFormat?: StringFilter<"ConversionAudit"> | string
+    fileSize?: IntFilter<"ConversionAudit"> | number
+    success?: BoolFilter<"ConversionAudit"> | boolean
+    errorCode?: StringNullableFilter<"ConversionAudit"> | string | null
+    durationMs?: IntFilter<"ConversionAudit"> | number
+    createdAt?: DateTimeFilter<"ConversionAudit"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ConversionAuditOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sourceFormat?: SortOrder
+    targetFormat?: SortOrder
+    fileSize?: SortOrder
+    success?: SortOrder
+    errorCode?: SortOrderInput | SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ConversionAuditWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConversionAuditWhereInput | ConversionAuditWhereInput[]
+    OR?: ConversionAuditWhereInput[]
+    NOT?: ConversionAuditWhereInput | ConversionAuditWhereInput[]
+    userId?: StringFilter<"ConversionAudit"> | string
+    sourceFormat?: StringFilter<"ConversionAudit"> | string
+    targetFormat?: StringFilter<"ConversionAudit"> | string
+    fileSize?: IntFilter<"ConversionAudit"> | number
+    success?: BoolFilter<"ConversionAudit"> | boolean
+    errorCode?: StringNullableFilter<"ConversionAudit"> | string | null
+    durationMs?: IntFilter<"ConversionAudit"> | number
+    createdAt?: DateTimeFilter<"ConversionAudit"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ConversionAuditOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sourceFormat?: SortOrder
+    targetFormat?: SortOrder
+    fileSize?: SortOrder
+    success?: SortOrder
+    errorCode?: SortOrderInput | SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+    _count?: ConversionAuditCountOrderByAggregateInput
+    _avg?: ConversionAuditAvgOrderByAggregateInput
+    _max?: ConversionAuditMaxOrderByAggregateInput
+    _min?: ConversionAuditMinOrderByAggregateInput
+    _sum?: ConversionAuditSumOrderByAggregateInput
+  }
+
+  export type ConversionAuditScalarWhereWithAggregatesInput = {
+    AND?: ConversionAuditScalarWhereWithAggregatesInput | ConversionAuditScalarWhereWithAggregatesInput[]
+    OR?: ConversionAuditScalarWhereWithAggregatesInput[]
+    NOT?: ConversionAuditScalarWhereWithAggregatesInput | ConversionAuditScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConversionAudit"> | string
+    userId?: StringWithAggregatesFilter<"ConversionAudit"> | string
+    sourceFormat?: StringWithAggregatesFilter<"ConversionAudit"> | string
+    targetFormat?: StringWithAggregatesFilter<"ConversionAudit"> | string
+    fileSize?: IntWithAggregatesFilter<"ConversionAudit"> | number
+    success?: BoolWithAggregatesFilter<"ConversionAudit"> | boolean
+    errorCode?: StringNullableWithAggregatesFilter<"ConversionAudit"> | string | null
+    durationMs?: IntWithAggregatesFilter<"ConversionAudit"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ConversionAudit"> | Date | string
+  }
+
+  export type ConversionSettingWhereInput = {
+    AND?: ConversionSettingWhereInput | ConversionSettingWhereInput[]
+    OR?: ConversionSettingWhereInput[]
+    NOT?: ConversionSettingWhereInput | ConversionSettingWhereInput[]
+    id?: StringFilter<"ConversionSetting"> | string
+    sourceFormat?: StringFilter<"ConversionSetting"> | string
+    maxFileSizeBytes?: IntFilter<"ConversionSetting"> | number
+    updatedAt?: DateTimeFilter<"ConversionSetting"> | Date | string
+  }
+
+  export type ConversionSettingOrderByWithRelationInput = {
+    id?: SortOrder
+    sourceFormat?: SortOrder
+    maxFileSizeBytes?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionSettingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sourceFormat?: string
+    AND?: ConversionSettingWhereInput | ConversionSettingWhereInput[]
+    OR?: ConversionSettingWhereInput[]
+    NOT?: ConversionSettingWhereInput | ConversionSettingWhereInput[]
+    maxFileSizeBytes?: IntFilter<"ConversionSetting"> | number
+    updatedAt?: DateTimeFilter<"ConversionSetting"> | Date | string
+  }, "id" | "sourceFormat">
+
+  export type ConversionSettingOrderByWithAggregationInput = {
+    id?: SortOrder
+    sourceFormat?: SortOrder
+    maxFileSizeBytes?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ConversionSettingCountOrderByAggregateInput
+    _avg?: ConversionSettingAvgOrderByAggregateInput
+    _max?: ConversionSettingMaxOrderByAggregateInput
+    _min?: ConversionSettingMinOrderByAggregateInput
+    _sum?: ConversionSettingSumOrderByAggregateInput
+  }
+
+  export type ConversionSettingScalarWhereWithAggregatesInput = {
+    AND?: ConversionSettingScalarWhereWithAggregatesInput | ConversionSettingScalarWhereWithAggregatesInput[]
+    OR?: ConversionSettingScalarWhereWithAggregatesInput[]
+    NOT?: ConversionSettingScalarWhereWithAggregatesInput | ConversionSettingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConversionSetting"> | string
+    sourceFormat?: StringWithAggregatesFilter<"ConversionSetting"> | string
+    maxFileSizeBytes?: IntWithAggregatesFilter<"ConversionSetting"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"ConversionSetting"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -9802,6 +12339,7 @@ export namespace Prisma {
     lastLoginAt?: Date | string | null
     verificationCodes?: VerificationCodeCreateNestedManyWithoutUserInput
     roles?: UserRoleCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9816,6 +12354,7 @@ export namespace Prisma {
     lastLoginAt?: Date | string | null
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutUserInput
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -9830,6 +12369,7 @@ export namespace Prisma {
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     verificationCodes?: VerificationCodeUpdateManyWithoutUserNestedInput
     roles?: UserRoleUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9844,6 +12384,7 @@ export namespace Prisma {
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10254,6 +12795,138 @@ export namespace Prisma {
     roleId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ConversionAuditCreateInput = {
+    id?: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutConversionAuditsInput
+  }
+
+  export type ConversionAuditUncheckedCreateInput = {
+    id?: string
+    userId: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
+  }
+
+  export type ConversionAuditUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutConversionAuditsNestedInput
+  }
+
+  export type ConversionAuditUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionAuditCreateManyInput = {
+    id?: string
+    userId: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
+  }
+
+  export type ConversionAuditUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionAuditUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionSettingCreateInput = {
+    id?: string
+    sourceFormat: string
+    maxFileSizeBytes: number
+    updatedAt?: Date | string
+  }
+
+  export type ConversionSettingUncheckedCreateInput = {
+    id?: string
+    sourceFormat: string
+    maxFileSizeBytes: number
+    updatedAt?: Date | string
+  }
+
+  export type ConversionSettingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    maxFileSizeBytes?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionSettingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    maxFileSizeBytes?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionSettingCreateManyInput = {
+    id?: string
+    sourceFormat: string
+    maxFileSizeBytes: number
+    updatedAt?: Date | string
+  }
+
+  export type ConversionSettingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    maxFileSizeBytes?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionSettingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    maxFileSizeBytes?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10325,6 +12998,12 @@ export namespace Prisma {
     none?: UserRoleWhereInput
   }
 
+  export type ConversionAuditListRelationFilter = {
+    every?: ConversionAuditWhereInput
+    some?: ConversionAuditWhereInput
+    none?: ConversionAuditWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10335,6 +13014,10 @@ export namespace Prisma {
   }
 
   export type UserRoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversionAuditOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10710,6 +13393,81 @@ export namespace Prisma {
     roleId?: SortOrder
   }
 
+  export type ConversionAuditCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sourceFormat?: SortOrder
+    targetFormat?: SortOrder
+    fileSize?: SortOrder
+    success?: SortOrder
+    errorCode?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConversionAuditAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+    durationMs?: SortOrder
+  }
+
+  export type ConversionAuditMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sourceFormat?: SortOrder
+    targetFormat?: SortOrder
+    fileSize?: SortOrder
+    success?: SortOrder
+    errorCode?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConversionAuditMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    sourceFormat?: SortOrder
+    targetFormat?: SortOrder
+    fileSize?: SortOrder
+    success?: SortOrder
+    errorCode?: SortOrder
+    durationMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConversionAuditSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+    durationMs?: SortOrder
+  }
+
+  export type ConversionSettingCountOrderByAggregateInput = {
+    id?: SortOrder
+    sourceFormat?: SortOrder
+    maxFileSizeBytes?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionSettingAvgOrderByAggregateInput = {
+    maxFileSizeBytes?: SortOrder
+  }
+
+  export type ConversionSettingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sourceFormat?: SortOrder
+    maxFileSizeBytes?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionSettingMinOrderByAggregateInput = {
+    id?: SortOrder
+    sourceFormat?: SortOrder
+    maxFileSizeBytes?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ConversionSettingSumOrderByAggregateInput = {
+    maxFileSizeBytes?: SortOrder
+  }
+
   export type VerificationCodeCreateNestedManyWithoutUserInput = {
     create?: XOR<VerificationCodeCreateWithoutUserInput, VerificationCodeUncheckedCreateWithoutUserInput> | VerificationCodeCreateWithoutUserInput[] | VerificationCodeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VerificationCodeCreateOrConnectWithoutUserInput | VerificationCodeCreateOrConnectWithoutUserInput[]
@@ -10724,6 +13482,13 @@ export namespace Prisma {
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
   }
 
+  export type ConversionAuditCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput> | ConversionAuditCreateWithoutUserInput[] | ConversionAuditUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversionAuditCreateOrConnectWithoutUserInput | ConversionAuditCreateOrConnectWithoutUserInput[]
+    createMany?: ConversionAuditCreateManyUserInputEnvelope
+    connect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+  }
+
   export type VerificationCodeUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<VerificationCodeCreateWithoutUserInput, VerificationCodeUncheckedCreateWithoutUserInput> | VerificationCodeCreateWithoutUserInput[] | VerificationCodeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VerificationCodeCreateOrConnectWithoutUserInput | VerificationCodeCreateOrConnectWithoutUserInput[]
@@ -10736,6 +13501,13 @@ export namespace Prisma {
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
     createMany?: UserRoleCreateManyUserInputEnvelope
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  }
+
+  export type ConversionAuditUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput> | ConversionAuditCreateWithoutUserInput[] | ConversionAuditUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversionAuditCreateOrConnectWithoutUserInput | ConversionAuditCreateOrConnectWithoutUserInput[]
+    createMany?: ConversionAuditCreateManyUserInputEnvelope
+    connect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -10786,6 +13558,20 @@ export namespace Prisma {
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
   }
 
+  export type ConversionAuditUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput> | ConversionAuditCreateWithoutUserInput[] | ConversionAuditUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversionAuditCreateOrConnectWithoutUserInput | ConversionAuditCreateOrConnectWithoutUserInput[]
+    upsert?: ConversionAuditUpsertWithWhereUniqueWithoutUserInput | ConversionAuditUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversionAuditCreateManyUserInputEnvelope
+    set?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    disconnect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    delete?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    connect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    update?: ConversionAuditUpdateWithWhereUniqueWithoutUserInput | ConversionAuditUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversionAuditUpdateManyWithWhereWithoutUserInput | ConversionAuditUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversionAuditScalarWhereInput | ConversionAuditScalarWhereInput[]
+  }
+
   export type VerificationCodeUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<VerificationCodeCreateWithoutUserInput, VerificationCodeUncheckedCreateWithoutUserInput> | VerificationCodeCreateWithoutUserInput[] | VerificationCodeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: VerificationCodeCreateOrConnectWithoutUserInput | VerificationCodeCreateOrConnectWithoutUserInput[]
@@ -10812,6 +13598,20 @@ export namespace Prisma {
     update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
+  }
+
+  export type ConversionAuditUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput> | ConversionAuditCreateWithoutUserInput[] | ConversionAuditUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConversionAuditCreateOrConnectWithoutUserInput | ConversionAuditCreateOrConnectWithoutUserInput[]
+    upsert?: ConversionAuditUpsertWithWhereUniqueWithoutUserInput | ConversionAuditUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConversionAuditCreateManyUserInputEnvelope
+    set?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    disconnect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    delete?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    connect?: ConversionAuditWhereUniqueInput | ConversionAuditWhereUniqueInput[]
+    update?: ConversionAuditUpdateWithWhereUniqueWithoutUserInput | ConversionAuditUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConversionAuditUpdateManyWithWhereWithoutUserInput | ConversionAuditUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConversionAuditScalarWhereInput | ConversionAuditScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutVerificationCodesInput = {
@@ -11042,6 +13842,20 @@ export namespace Prisma {
     upsert?: RoleUpsertWithoutUsersInput
     connect?: RoleWhereUniqueInput
     update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutUsersInput, RoleUpdateWithoutUsersInput>, RoleUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type UserCreateNestedOneWithoutConversionAuditsInput = {
+    create?: XOR<UserCreateWithoutConversionAuditsInput, UserUncheckedCreateWithoutConversionAuditsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversionAuditsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutConversionAuditsNestedInput = {
+    create?: XOR<UserCreateWithoutConversionAuditsInput, UserUncheckedCreateWithoutConversionAuditsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConversionAuditsInput
+    upsert?: UserUpsertWithoutConversionAuditsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConversionAuditsInput, UserUpdateWithoutConversionAuditsInput>, UserUncheckedUpdateWithoutConversionAuditsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11306,6 +14120,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ConversionAuditCreateWithoutUserInput = {
+    id?: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
+  }
+
+  export type ConversionAuditUncheckedCreateWithoutUserInput = {
+    id?: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
+  }
+
+  export type ConversionAuditCreateOrConnectWithoutUserInput = {
+    where: ConversionAuditWhereUniqueInput
+    create: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversionAuditCreateManyUserInputEnvelope = {
+    data: ConversionAuditCreateManyUserInput | ConversionAuditCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type VerificationCodeUpsertWithWhereUniqueWithoutUserInput = {
     where: VerificationCodeWhereUniqueInput
     update: XOR<VerificationCodeUpdateWithoutUserInput, VerificationCodeUncheckedUpdateWithoutUserInput>
@@ -11363,6 +14209,37 @@ export namespace Prisma {
     roleId?: StringFilter<"UserRole"> | string
   }
 
+  export type ConversionAuditUpsertWithWhereUniqueWithoutUserInput = {
+    where: ConversionAuditWhereUniqueInput
+    update: XOR<ConversionAuditUpdateWithoutUserInput, ConversionAuditUncheckedUpdateWithoutUserInput>
+    create: XOR<ConversionAuditCreateWithoutUserInput, ConversionAuditUncheckedCreateWithoutUserInput>
+  }
+
+  export type ConversionAuditUpdateWithWhereUniqueWithoutUserInput = {
+    where: ConversionAuditWhereUniqueInput
+    data: XOR<ConversionAuditUpdateWithoutUserInput, ConversionAuditUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ConversionAuditUpdateManyWithWhereWithoutUserInput = {
+    where: ConversionAuditScalarWhereInput
+    data: XOR<ConversionAuditUpdateManyMutationInput, ConversionAuditUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ConversionAuditScalarWhereInput = {
+    AND?: ConversionAuditScalarWhereInput | ConversionAuditScalarWhereInput[]
+    OR?: ConversionAuditScalarWhereInput[]
+    NOT?: ConversionAuditScalarWhereInput | ConversionAuditScalarWhereInput[]
+    id?: StringFilter<"ConversionAudit"> | string
+    userId?: StringFilter<"ConversionAudit"> | string
+    sourceFormat?: StringFilter<"ConversionAudit"> | string
+    targetFormat?: StringFilter<"ConversionAudit"> | string
+    fileSize?: IntFilter<"ConversionAudit"> | number
+    success?: BoolFilter<"ConversionAudit"> | boolean
+    errorCode?: StringNullableFilter<"ConversionAudit"> | string | null
+    durationMs?: IntFilter<"ConversionAudit"> | number
+    createdAt?: DateTimeFilter<"ConversionAudit"> | Date | string
+  }
+
   export type UserCreateWithoutVerificationCodesInput = {
     id?: string
     email: string
@@ -11374,6 +14251,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     roles?: UserRoleCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -11387,6 +14265,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -11416,6 +14295,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     roles?: UserRoleUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -11429,6 +14309,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserRoleCreateWithoutRoleInput = {
@@ -11672,6 +14553,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     verificationCodes?: VerificationCodeCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRolesInput = {
@@ -11685,6 +14567,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     lastLoginAt?: Date | string | null
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+    conversionAudits?: ConversionAuditUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRolesInput = {
@@ -11737,6 +14620,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     verificationCodes?: VerificationCodeUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRolesInput = {
@@ -11750,6 +14634,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+    conversionAudits?: ConversionAuditUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RoleUpsertWithoutUsersInput = {
@@ -11781,6 +14666,78 @@ export namespace Prisma {
     grants?: GrantUncheckedUpdateManyWithoutRoleNestedInput
   }
 
+  export type UserCreateWithoutConversionAuditsInput = {
+    id?: string
+    email: string
+    password: string
+    photoUrl?: string | null
+    status?: $Enums.UserStatus
+    emailVerified?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    verificationCodes?: VerificationCodeCreateNestedManyWithoutUserInput
+    roles?: UserRoleCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutConversionAuditsInput = {
+    id?: string
+    email: string
+    password: string
+    photoUrl?: string | null
+    status?: $Enums.UserStatus
+    emailVerified?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lastLoginAt?: Date | string | null
+    verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+    roles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutConversionAuditsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutConversionAuditsInput, UserUncheckedCreateWithoutConversionAuditsInput>
+  }
+
+  export type UserUpsertWithoutConversionAuditsInput = {
+    update: XOR<UserUpdateWithoutConversionAuditsInput, UserUncheckedUpdateWithoutConversionAuditsInput>
+    create: XOR<UserCreateWithoutConversionAuditsInput, UserUncheckedCreateWithoutConversionAuditsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutConversionAuditsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutConversionAuditsInput, UserUncheckedUpdateWithoutConversionAuditsInput>
+  }
+
+  export type UserUpdateWithoutConversionAuditsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationCodes?: VerificationCodeUpdateManyWithoutUserNestedInput
+    roles?: UserRoleUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutConversionAuditsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+    roles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type VerificationCodeCreateManyUserInput = {
     id?: string
     type: $Enums.VerificationCodeType
@@ -11796,6 +14753,17 @@ export namespace Prisma {
 
   export type UserRoleCreateManyUserInput = {
     roleId: string
+  }
+
+  export type ConversionAuditCreateManyUserInput = {
+    id?: string
+    sourceFormat: string
+    targetFormat: string
+    fileSize: number
+    success: boolean
+    errorCode?: string | null
+    durationMs: number
+    createdAt?: Date | string
   }
 
   export type VerificationCodeUpdateWithoutUserInput = {
@@ -11847,6 +14815,39 @@ export namespace Prisma {
 
   export type UserRoleUncheckedUpdateManyWithoutUserInput = {
     roleId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConversionAuditUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionAuditUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConversionAuditUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sourceFormat?: StringFieldUpdateOperationsInput | string
+    targetFormat?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    success?: BoolFieldUpdateOperationsInput | boolean
+    errorCode?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateManyRoleInput = {
