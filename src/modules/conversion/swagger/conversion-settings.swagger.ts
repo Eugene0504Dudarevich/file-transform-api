@@ -1,5 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { IMAGE_FORMATS } from '../types/image-conversion.types';
+import { SUPPORTED_FORMATS } from '../types/conversion.types';
 
 export const ApiGetConversionSettings = (): MethodDecorator => {
   return (
@@ -24,7 +26,7 @@ export const ApiGetConversionSettings = (): MethodDecorator => {
           properties: {
             sourceFormat: {
               type: 'string',
-              enum: ['csv', 'json', 'xml', 'yaml'],
+              enum: [...SUPPORTED_FORMATS, ...IMAGE_FORMATS],
             },
             maxFileSizeBytes: {
               type: 'integer',
@@ -74,7 +76,7 @@ export const ApiUpdateConversionSetting = (): MethodDecorator => {
         properties: {
           sourceFormat: {
             type: 'string',
-            enum: ['csv', 'json', 'xml', 'yaml'],
+            enum: [...SUPPORTED_FORMATS, ...IMAGE_FORMATS],
             example: 'json',
           },
           maxFileSizeBytes: {
@@ -95,7 +97,7 @@ export const ApiUpdateConversionSetting = (): MethodDecorator => {
         properties: {
           sourceFormat: {
             type: 'string',
-            enum: ['csv', 'json', 'xml', 'yaml'],
+            enum: [...SUPPORTED_FORMATS, ...IMAGE_FORMATS],
           },
           maxFileSizeBytes: {
             type: 'integer',

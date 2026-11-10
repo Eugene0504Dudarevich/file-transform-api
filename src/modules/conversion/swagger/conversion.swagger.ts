@@ -32,7 +32,7 @@ export const ApiGetConversionFormats = (): MethodDecorator => {
               type: 'string',
               enum: [...SUPPORTED_FORMATS],
             },
-            example: ['csv', 'json', 'xml', 'yaml'],
+            example: [...SUPPORTED_FORMATS],
           },
           conversions: {
             type: 'array',
